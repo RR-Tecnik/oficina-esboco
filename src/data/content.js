@@ -1,0 +1,179 @@
+export const brand = {
+  mark: 'RR',
+  name: 'Technik Performance',
+  location: 'Valongo · Portugal',
+}
+
+// Keep the tab order aligned with the page order below.
+export const nav = [
+  { id: 'about-cover', label: 'Sobre nós' },
+  { id: 'services-cover', label: 'Serviços' },
+  { id: 'projects-cover', label: 'Projetos' },
+  { id: 'location-cover', label: 'Localização' },
+  { id: 'contact-cover', label: 'Contactos e marcações' },
+]
+
+const workshopPhotos = [
+  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845225124438097/4913ab13-87de-4ec6-88e4-6430eb430afa.jpg?ex=6a99fcbb&is=6a98ab3b&hm=598b3b5b9937dd82d707dc4f2299bb590d71c499d42eaf6786bb5307191e664c&',
+  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224709324830/ff63a536-27e1-448b-b126-535eaf611a50.jpg?ex=6a99fcbb&is=6a98ab3b&hm=e4d567e788f82ed59b41631677424eb385ede288b367e86409be2c7fd058d589&',
+  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845223731929118/f5ba2cd5-2a59-47aa-930b-89dfde7e0137.jpg?ex=6a99fcbb&is=6a98ab3b&hm=b7a0058a5472559c70772bd5a1a0dd2e68145486a52ddca37f178c505d6d5065&',
+  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224377847869/2832d913-5ab7-4db9-bedb-46c6c03fd57d.jpg?ex=6a99fcbb&is=6a98ab3b&hm=bdedcb1a4d3cec9b10f8b927ef6e4802b52820bce86491ddd3104ea905f2c62f&',
+  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224084512818/1979e75d-9dbb-417d-bd37-99e903ef1d58.jpg?ex=6a99fcbb&is=6a98ab3b&hm=b17cb50e14d064f662db5b3afa68d7917a69584635cab0895dd4eb3e4512c89b&',
+]
+
+const carCoverPhotos = [
+  'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=2400&q=90',
+  'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2400&q=90',
+  'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2400&q=90',
+]
+
+// Each entry is one full-screen page. `kind` decides which layout
+// template renders it (see components/pages.js). Arrows, dots and tabs
+// all follow this array in order.
+export const pages = [
+  {
+    id: 'home',
+    kind: 'cover',
+    number: '00',
+    eyebrow: 'Valongo · Portugal',
+    title: 'Performance,\ncom propósito.',
+    lede: 'Um atelier independente para máquinas que pedem mais. Engenharia, detalhe e paixão reunidos no mesmo lugar.',
+    image: 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=2400&q=90',
+    cta: { label: 'Conhecer o atelier', target: 'about' },
+  },
+  {
+    id: 'about-cover',
+    tabId: 'about-cover',
+    kind: 'cover',
+    number: '01',
+    eyebrow: '01 · Sobre nós',
+    title: 'Sobre nós.',
+    lede: 'Conheça a oficina, os critérios e a ambição por trás de cada intervenção.',
+    image: carCoverPhotos[0],
+    cta: { label: 'Conhecer', target: 'about' },
+  },
+  {
+    id: 'about',
+    tabId: 'about-cover',
+    kind: 'copy-photos',
+    number: '01',
+    eyebrow: '01 · Sobre nós',
+    title: 'Mais do que\numa oficina.',
+    lede: 'A RR Technik é uma oficina especializada em carros desportivos e de marcas premium, fundada por dois sócios com o mesmo critério: se vai ser feito, é para ser feito com excelência.',
+    body: [
+      { heading: 'No que acreditamos', text: 'Excelência em cada intervenção, com procedimentos certificados, parâmetros específicos e grelhas de avaliação rigorosas aplicadas a cada trabalho. Honestidade total com o cliente: o orçamento vem antes do trabalho, sem surpresas na fatura. E dedicação constante à aprendizagem, porque cada geração de carros traz sistemas novos, e queremos estar sempre na vanguarda da técnica e do conhecimento que colocamos ao serviço de cada carro.' },
+      { heading: 'Para onde vamos', text: 'A ambição é clara: ser a referência em Portugal para preparação e afinação de automóveis de performance, e o parceiro de confiança de equipas amadoras e profissionais por todo o país. A base já está montada, com banco de potência próprio, alinhamento de geometria 3D, quatro postos de elevação e parcerias com marcas como KW, Brembo, Motul e Michelin. O resto constrói-se cliente a cliente, carro a carro.' },
+    ],
+    signature: 'Rodrigo e Rafael, RR Technik',
+  },
+  {
+    id: 'services-cover',
+    tabId: 'services-cover',
+    kind: 'cover',
+    number: '02',
+    eyebrow: '02 · Serviços',
+    title: 'Serviços.',
+    lede: 'Manutenção, preparação e afinação para carros que pedem mais.',
+    image: carCoverPhotos[1],
+    cta: { label: 'Ver serviços', target: 'services' },
+  },
+  {
+    id: 'services',
+    tabId: 'services-cover',
+    kind: 'copy-list',
+    number: '02',
+    eyebrow: '02 · Serviços',
+    title: 'Afinamos\no extraordinário.',
+    lede: 'Na RR Technik, cada intervenção é pensada para o carro que temos à nossa frente. Não existe um "tamanho único" quando se fala de performance.',
+    body: [
+      { text: 'Fazemos revisões e manutenção especializada para todas as marcas desportivas e premium, com o rigor que estes motores exigem. Preparamos o carro antes de um dia de pista e verificamos tudo depois dele, para que a única surpresa em cada trackday seja o tempo de volta.' },
+      { text: 'Cada orçamento é apresentado antes do trabalho começar, com tudo explicado, para que a decisão seja sempre sua.' },
+    ],
+    highlights: [
+      { title: 'Manutenção especializada', text: 'Revisões e acompanhamento mecânico para todas as marcas desportivas e premium.' },
+      { title: 'Preparação de pista', text: 'O carro pronto antes do trackday e revisto por completo depois dele.' },
+      { title: 'Banco de potência e reprogramação', text: 'Afinação em banco próprio e ajuste da eletrónica do motor.' },
+      { title: 'Periféricos de performance', text: 'Escapes, admissões, radiadores, travões e suspensões. KW, Brembo, Motul, BMC.' },
+      { title: 'Rollbar e rollcage', text: 'Instalação de rigidez estrutural extra para quem leva o carro à pista.' },
+    ],
+  },
+  {
+    id: 'projects-cover',
+    tabId: 'projects-cover',
+    kind: 'cover',
+    number: '03',
+    eyebrow: '03 · Projetos',
+    title: 'Projetos.',
+    lede: 'Carros, intervenções e resultados construídos com rigor.',
+    image: carCoverPhotos[1],
+    cta: { label: 'Ver projetos', target: 'projects' },
+  },
+  {
+    id: 'projects',
+    tabId: 'projects-cover',
+    kind: 'copy-photos',
+    number: '03',
+    eyebrow: '03 · Projetos',
+    title: 'Cada carro,\numa história.',
+    lede: 'Cada carro que passa pela RR Technik conta uma história: uma preparação para pista, uma afinação que faltava ou um problema que mais ninguém tinha resolvido.',
+    body: [
+      { text: 'Esta é a montra desse trabalho: os carros, as intervenções, os resultados. Uma forma de mostrar, e não apenas dizer, o que significa rigor aplicado à performance.' },
+    ],
+    note: 'Secção a atualizar com os primeiros projetos',
+    photos: workshopPhotos,
+  },
+  {
+    id: 'location-cover',
+    tabId: 'location-cover',
+    kind: 'cover',
+    number: '04',
+    eyebrow: '04 · Localização',
+    title: 'Localização.',
+    lede: 'Encontre a RR Technik em Valongo, com acesso fácil pela A4 e A41.',
+    image: workshopPhotos[1],
+    cta: { label: 'Ver localização', target: 'location' },
+  },
+  {
+    id: 'location',
+    tabId: 'location-cover',
+    kind: 'copy-map',
+    number: '04',
+    eyebrow: '04 · Onde estamos',
+    title: 'Chegue ao\nponto certo.',
+    lede: 'Estamos em Valongo, a poucos minutos do nó da A4/A41. É um acesso pensado para quem vem de reboque, de trailer ou simplesmente a conduzir.',
+    body: [
+      { text: 'A oficina foi construída de raiz para este propósito: uma nave equipada com quatro postos de elevação, banco de potência próprio, alinhamento de geometria 3D e ventilação forçada em toda a área de trabalho. Um espaço à medida dos carros que recebe.' },
+    ],
+    address: ['Rua do Negral 1007', 'Valongo, Portugal'],
+    mapUrl: 'https://maps.google.com/?q=Rua+do+Negral+1007+Valongo+Portugal',
+    photos: workshopPhotos,
+  },
+  {
+    id: 'contact-cover',
+    tabId: 'contact-cover',
+    kind: 'cover',
+    number: '05',
+    eyebrow: '05 · Contactos e marcações',
+    title: 'Fale connosco.',
+    lede: 'O próximo capítulo do seu carro começa aqui.',
+    image: carCoverPhotos[2],
+    cta: { label: 'Contactar', target: 'contact' },
+  },
+  {
+    id: 'contact',
+    tabId: 'contact-cover',
+    kind: 'copy-form',
+    number: '05',
+    eyebrow: '05 · Visite-nos',
+    title: 'O próximo capítulo\ncomeça aqui.',
+    lede: 'Tem um carro que merece mais atenção do que está a ter? Fale connosco.',
+    body: [
+      { text: 'Respondemos a todos os pedidos de orçamento sem compromisso, e as marcações são feitas com a antecedência necessária para dedicarmos a cada carro o tempo que ele precisa. Nada de trabalho apressado.' },
+    ],
+    address: ['Rua do Negral 1007', 'Valongo, Portugal'],
+    hours: 'Seg – Sex, 08:30 – 18:00',
+    email: 'cardosorodrigo1000@gmail.com',
+    phone: '960 455 763',
+    phoneHref: '960455763',
+  },
+]

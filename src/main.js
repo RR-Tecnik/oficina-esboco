@@ -1,97 +1,141 @@
 import './style.css'
+import { brand, nav, pages } from './data/content.js'
+import { renderShell } from './components/shell.js'
+import { renderPage } from './components/pages.js'
 
-const slides = [
-  { id: 'atelier', eyebrow: 'Rua do Negral 1007 · Portugal', title: 'Performance,\ncom propósito.', description: 'Um atelier independente para máquinas que pedem mais. Engenharia, detalhe e paixão reunidos no mesmo lugar.', image: 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=2400&q=90', action: 'Descobrir o atelier' },
-  { id: 'atelier-about', eyebrow: '01 / Sobre Nós', title: 'Mais do que\numa oficina.', description: 'A RR Technik é uma oficina especializada em carros desportivos e de marcas premium, fundada por dois sócios com o mesmo critério: se vai ser feito, é para ser feito com excelência.', image: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=2000&q=85', action: 'Conhecer a equipa' },
-  { id: 'services', eyebrow: '02 / Serviços', title: 'Afinamos\no extraordinário.', description: 'Da manutenção preventiva à preparação de pista, tratamos cada intervenção com a mesma obsessão pelo detalhe.', image: 'https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=2000&q=85', action: 'Ver serviços' },
-  { id: 'partners', eyebrow: '03 / A nossa rede', title: 'Os melhores\nno mesmo ritmo.', description: 'Trabalhamos com especialistas que partilham a nossa exigência: manutenção, software, pista, performance e detalhe.', image: 'https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&w=2000&q=85', action: 'Ver parceiros' },
-  { id: 'gallery', eyebrow: '04 / Caderno de estrada', title: 'Feito para\ndeixar marca.', description: 'Momentos de pista, metal trabalhado e máquinas que contam histórias. Uma seleção do nosso universo em movimento.', image: 'https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=2000&q=85', action: 'Explorar galeria' },
-  { id: 'location', eyebrow: '05 / Onde estamos', title: 'Chegue ao\nponto certo.', description: 'O atelier vive na Rua do Negral 1007, Portugal. Um espaço reservado para projetos com ambição.', image: 'https://images.unsplash.com/photo-1473445361085-b9a07f55608b?auto=format&fit=crop&w=2000&q=85', action: 'Abrir localização' },
-  { id: 'contact', eyebrow: '06 / Visite-nos', title: 'O próximo capítulo\ncomeça aqui.', description: 'Traga a sua ideia, o seu carro ou simplesmente a vontade de o tornar mais seu. Estamos prontos para ouvir.', image: 'https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=2000&q=85', action: 'Entrar em contacto' },
-]
+const app = document.querySelector('#app')
+app.innerHTML = renderShell(brand, nav, pages.length)
 
-const serviceItems = [
-  ['Manutenção', 'Manutenção preventiva e acompanhamento mecânico para manter cada carro no seu melhor estado.'],
-  ['Modificações', 'Alterações pensadas para reforçar a identidade, o comportamento e a presença de cada automóvel.'],
-  ['Reprogramação', 'Ajustes de software pensados para entregar uma resposta mais precisa, progressiva e personalizada.'],
-  ['Vendas à consignação', 'Apresentação e venda de automóveis selecionados com acompanhamento próximo e transparente.'],
-]
+const stage = document.querySelector('#stage')
+const pagerFill = document.querySelector('#pager-fill')
+const pagerCount = document.querySelector('#pager-count')
+const dotsHost = document.querySelector('#pager-dots')
+const menuToggle = document.querySelector('.menu-toggle')
+const mobileNav = document.querySelector('.mobile-nav')
+const lightbox = document.querySelector('#lightbox')
+const lightboxImg = lightbox.querySelector('img')
+const lightboxCount = lightbox.querySelector('.lightbox-count')
+const sectionCount = pages.filter((page) => page.id === page.tabId?.replace('-cover', '')).length
 
-const aboutPhotos = [
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845225124438097/4913ab13-87de-4ec6-88e4-6430eb430afa.jpg?ex=6a99fcbb&is=6a98ab3b&hm=598b3b5b9937dd82d707dc4f2299bb590d71c499d42eaf6786bb5307191e664c&',
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224709324830/ff63a536-27e1-448b-b126-535eaf611a50.jpg?ex=6a99fcbb&is=6a98ab3b&hm=e4d567e788f82ed59b41631677424eb385ede288b367e86409be2c7fd058d589&',
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845223731929118/f5ba2cd5-2a59-47aa-930b-89dfde7e0137.jpg?ex=6a99fcbb&is=6a98ab3b&hm=b7a0058a5472559c70772bd5a1a0dd2e68145486a52ddca37f178c505d6d5065&',
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224377847869/2832d913-5ab7-4db9-bedb-46c6c03fd57d.jpg?ex=6a99fcbb&is=6a98ab3b&hm=bdedcb1a4d3cec9b10f8b927ef6e4802b52820bce86491ddd3104ea905f2c62f&',
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224084512818/1979e75d-9dbb-417d-bd37-99e903ef1d58.jpg?ex=6a99fcbb&is=6a98ab3b&hm=b17cb50e14d064f662db5b3afa68d7917a69584635cab0895dd4eb3e4512c89b&',
-]
+dotsHost.innerHTML = pages.map((page, i) => `<button class="dot" type="button" data-index="${i}" aria-label="Ir para ${page.eyebrow}"></button>`).join('')
+const dots = [...dotsHost.querySelectorAll('.dot')]
 
-document.querySelector('#app').innerHTML = `
-  <main class="site-shell">
-    <header class="topbar">
-      <a class="brand" href="#atelier" aria-label="RR Tecnik - início"><span>RR</span><small>Tecnik<br>performance</small></a>
-      <nav class="main-nav" aria-label="Navegação principal"><a href="#atelier-about" data-nav="1">Sobre Nós</a><div class="services-menu"><button class="services-trigger" type="button" aria-expanded="false">Serviços <span>⌄</span></button><div class="services-dropdown">${serviceItems.map(([name], index) => `<button type="button" class="service-option" data-service="${index}">${name}</button>`).join('')}</div></div><a href="#location" data-nav="5">Localização</a><a href="#gallery" data-nav="4">Projetos</a><a href="#contact" data-nav="6">Contactos e marcações</a></nav>
-    </header>
-    <section class="viewport" aria-live="polite">
-      <div class="slides">${slides.map((slide, index) => `<article class="slide ${index === 0 ? 'is-active' : ''}" data-slide="${index}" id="${slide.id}"><div class="slide-image" style="background-image: url('${slide.image}')"></div>${slide.id === 'atelier-about' ? `<div class="about-gallery">${aboutPhotos.map((photo, photoIndex) => `<img src="${photo}" alt="Fotografia do espaço RR Technik ${photoIndex + 1}" loading="lazy">`).join('')}</div>` : ''}${slide.id === 'gallery' ? `<div class="project-gallery">${aboutPhotos.map((photo, photoIndex) => `<button class="project-photo" type="button" data-photo="${photoIndex + 1}"><img src="${photo}" alt="Projeto RR Technik ${photoIndex + 1}" loading="lazy"><span>0${photoIndex + 1}</span></button>`).join('')}</div>` : ''}<div class="image-shade"></div><div class="slide-content"><p class="eyebrow">${slide.eyebrow}</p><h1>${slide.title.replace('\n', '<br>')}</h1><p class="description">${slide.description}</p>${slide.id === 'atelier-about' ? `<div class="about-details"><p>Existe aqui uma paixão enorme por carros, e é essa paixão que guia cada trabalho que sai da oficina. Gostamos do que fazemos, e isso nota-se na dedicação posta em cada detalhe, por mais pequeno que pareça.</p><h2>No que acreditamos</h2><p>Excelência em cada intervenção, com procedimentos certificados, parâmetros específicos e grelhas de avaliação rigorosas aplicadas a cada trabalho. Honestidade total com o cliente: o orçamento vem antes do trabalho, sem surpresas na fatura. E dedicação constante à aprendizagem, porque cada geração de carros traz sistemas novos, e queremos estar sempre na vanguarda da técnica e do conhecimento que colocamos ao serviço de cada carro.</p><h2>Para onde vamos</h2><p>A ambição é clara: ser a referência em Portugal para preparação e afinação de automóveis de performance, e o parceiro de confiança de equipas amadoras e profissionais por todo o país. Mais do que isso, a vontade é trazer o gosto e a cultura automobilística para o nosso país, mostrando que há espaço e público para o motorsport ser levado a sério em Portugal.</p><p>A base já está montada: banco de potência próprio, alinhamento de geometria 3D, quatro postos de elevação, com parcerias com marcas como KW, Brembo, Motul e Michelin. O resto constrói-se cliente a cliente, carro a carro.</p><p>Confiamos no que fazemos porque testamos, medimos e documentamos tudo o que sai daqui, com honestidade em cada passo. Não é um discurso, é como trabalhamos.</p><p class="about-signature">Rodrigo e Rafael<br>RR Technik</p></div>` : ''}<a class="primary-link" href="#${slide.id === 'atelier' ? 'atelier-about' : slide.id === 'contact' ? 'contact' : slide.id}">${slide.action}<span>↗</span></a></div>${slide.id === 'services' ? '<div class="service-list"><div><span>01</span>Manutenção</div><div><span>02</span>Modificações</div><div><span>03</span>Reprogramação</div><div><span>04</span>Vendas à consignação</div></div>' : ''}${slide.id === 'partners' ? '<div class="partner-list"><span>KW</span><span>034</span><span>HJS</span><span>ST</span></div>' : ''}${slide.id === 'location' ? '<div class="contact-card"><p>Rua do Negral 1007</p><p>Portugal</p><a href="https://maps.google.com/?q=Rua+do+Negral+1007+Portugal" target="_blank" rel="noreferrer">Abrir no mapa ↗</a></div>' : ''}${slide.id === 'contact' ? '<div class="contact-card"><p>Rua do Negral 1007</p><p>Portugal</p><a href="mailto:cardosorodrigo1000@gmail.com">cardosorodrigo1000@gmail.com</a><a href="tel:960455763">960 455 763</a></div>' : ''}</article>`).join('')}</div>
-    </section>
-    <div class="location-gallery">${aboutPhotos.map((photo, photoIndex) => `<button class="project-photo" type="button" data-photo="${photoIndex + 1}"><img src="${photo}" alt="Fotografia da localização RR Technik ${photoIndex + 1}" loading="lazy"><span>0${photoIndex + 1}</span></button>`).join('')}</div>
-    <div class="side-rail"><div class="progress"><span></span></div><span class="counter"><b>01</b> / ${String(slides.length).padStart(2, '0')}</span></div>
-    <button class="arrow arrow-prev" type="button" aria-label="Anterior"><span></span></button><button class="arrow arrow-next" type="button" aria-label="Seguinte"><span></span></button>
-    <div class="mobile-dots" aria-label="Escolher secção">${slides.map((slide, i) => `<button class="dot ${i === 0 ? 'is-active' : ''}" data-go="${i}" aria-label="Ir para ${slide.eyebrow}"></button>`).join('')}</div>
-    <section class="footer-panel" id="contact-details">
-      <div class="footer-mark"><span>RR</span><small>Tecnik<br>performance</small></div>
-      <div class="footer-column"><small>Explorar</small><a href="#atelier-about">Sobre nós</a><a href="#services">Serviços</a><a href="#partners">Parcerias</a></div>
-      <div class="footer-column"><small>RR Tecnik</small><a href="#gallery">Galeria</a><a href="#location">Localização</a><a href="#contact">Contactos</a></div>
-      <div class="footer-column contact-info"><small>Visite-nos</small><p>Rua do Negral 1007<br>Portugal</p><p>Seg — Sex · 08:30 — 18:00</p><a href="mailto:cardosorodrigo1000@gmail.com">cardosorodrigo1000@gmail.com</a><a href="tel:960455763">960 455 763</a></div>
-    </section>
-    <footer class="footer"><span>© 2026 RR Tecnik</span><span>Performance / Detail / Drive</span><span>Instagram&nbsp; ↗</span></footer>
-    <aside class="service-detail" aria-hidden="true"><button class="detail-close" type="button" aria-label="Fechar">×</button><p class="eyebrow">Serviços / RR Tecnik</p><h2></h2><p class="detail-copy"></p><a href="#contact" class="primary-link">Falar sobre este serviço <span>↗</span></a></aside>
-    <aside class="photo-lightbox" aria-hidden="true"><button class="photo-close" type="button" aria-label="Fechar imagem">×</button><img src="" alt=""><span class="photo-count"></span></aside>
-  </main>
-`
+let current = -1
 
-let current = 0
-const slideElements = [...document.querySelectorAll('.slide')]
-const navLinks = [...document.querySelectorAll('[data-nav]')]
-const dots = [...document.querySelectorAll('.dot')]
-const progress = document.querySelector('.progress span')
-const counter = document.querySelector('.counter')
-const siteShell = document.querySelector('.site-shell')
-const servicesTrigger = document.querySelector('.services-trigger')
-const servicesMenu = document.querySelector('.services-menu')
-const serviceDetail = document.querySelector('.service-detail')
-const photoLightbox = document.querySelector('.photo-lightbox')
-const lightboxImage = photoLightbox.querySelector('img')
-
-function goTo(index) {
-  current = (index + slides.length) % slides.length
-  siteShell.classList.toggle('is-gallery', slides[current].id === 'gallery')
-  siteShell.classList.toggle('is-location', slides[current].id === 'location')
-  slideElements.forEach((slide, i) => slide.classList.toggle('is-active', i === current))
-  navLinks.forEach((link) => link.classList.toggle('is-active', Number(link.dataset.nav) === current))
-  dots.forEach((dot, i) => dot.classList.toggle('is-active', i === current))
-  progress.style.height = `${((current + 1) / slides.length) * 100}%`
-  counter.innerHTML = `<b>${String(current + 1).padStart(2, '0')}</b> / ${String(slides.length).padStart(2, '0')}`
-  history.replaceState(null, '', `#${slides[current].id}`)
+function setActiveChrome(index) {
+  const page = pages[index]
+  document.querySelectorAll('.tab, .mobile-tab').forEach((el) => el.classList.toggle('is-active', el.dataset.go === (page.tabId || page.id)))
+  dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index))
+  pagerFill.style.height = `${(Number(page.number) / sectionCount) * 100}%`
+  pagerCount.textContent = `${page.number} / ${String(sectionCount).padStart(2, '0')}`
 }
 
-document.querySelector('.arrow-prev').addEventListener('click', () => goTo(current - 1))
-document.querySelector('.arrow-next').addEventListener('click', () => goTo(current + 1))
-dots.forEach((dot) => dot.addEventListener('click', () => goTo(Number(dot.dataset.go))))
-navLinks.forEach((link) => link.addEventListener('click', (event) => { event.preventDefault(); goTo(Number(link.dataset.nav)) }))
-servicesTrigger.addEventListener('click', () => { const open = servicesMenu.classList.toggle('is-open'); servicesTrigger.setAttribute('aria-expanded', String(open)) })
-document.querySelectorAll('.service-option').forEach((option) => option.addEventListener('click', () => { const [name, copy] = serviceItems[Number(option.dataset.service)]; serviceDetail.querySelector('h2').textContent = name; serviceDetail.querySelector('.detail-copy').textContent = copy; serviceDetail.classList.add('is-open'); serviceDetail.setAttribute('aria-hidden', 'false'); servicesMenu.classList.remove('is-open'); servicesTrigger.setAttribute('aria-expanded', 'false') }))
-document.querySelector('.detail-close').addEventListener('click', () => { serviceDetail.classList.remove('is-open'); serviceDetail.setAttribute('aria-hidden', 'true') })
-document.querySelectorAll('.project-photo').forEach((photo) => photo.addEventListener('click', () => { lightboxImage.src = photo.querySelector('img').src; lightboxImage.alt = photo.querySelector('img').alt; photoLightbox.querySelector('.photo-count').textContent = `${photo.dataset.photo.padStart(2, '0')} / 05`; photoLightbox.classList.add('is-open'); photoLightbox.setAttribute('aria-hidden', 'false') }))
-document.querySelector('.photo-close').addEventListener('click', () => { photoLightbox.classList.remove('is-open'); photoLightbox.setAttribute('aria-hidden', 'true') })
-document.addEventListener('click', (event) => { if (!servicesMenu.contains(event.target)) { servicesMenu.classList.remove('is-open'); servicesTrigger.setAttribute('aria-expanded', 'false') } })
-document.addEventListener('keydown', (event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowDown') goTo(current + 1); if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') goTo(current - 1) })
-let touchStart = 0
-document.querySelector('.viewport').addEventListener('touchstart', (event) => { touchStart = event.changedTouches[0].screenX }, { passive: true })
-document.querySelector('.viewport').addEventListener('touchend', (event) => { const distance = event.changedTouches[0].screenX - touchStart; if (Math.abs(distance) > 50) goTo(current + (distance < 0 ? 1 : -1)) }, { passive: true })
-const initial = slides.findIndex((slide) => slide.id === window.location.hash.slice(1))
-goTo(initial >= 0 ? initial : 0)
-window.addEventListener('hashchange', () => {
-  const next = slides.findIndex((slide) => slide.id === window.location.hash.slice(1))
-  if (next >= 0 && next !== current) goTo(next)
+function mountPage(index, { instant = false } = {}) {
+  const page = pages[index]
+  if (!page) return
+  current = index
+
+  const swap = () => {
+    stage.innerHTML = renderPage(page)
+    stage.dataset.kind = page.kind
+    stage.firstElementChild.scrollTop = 0
+    stage.querySelector('.page-copy')?.scrollTo(0, 0)
+    requestAnimationFrame(() => stage.classList.add('is-visible'))
+    wirePageContent()
+  }
+
+  if (instant || !stage.firstElementChild) {
+    swap()
+  } else {
+    stage.classList.remove('is-visible')
+    window.setTimeout(swap, 220)
+  }
+
+  setActiveChrome(index)
+  history.replaceState(null, '', `#${page.id}`)
+}
+
+function goToId(id) {
+  const index = pages.findIndex((p) => p.id === id)
+  if (index >= 0 && index !== current) mountPage(index)
+}
+
+function goToIndex(index) {
+  const next = (index + pages.length) % pages.length
+  if (next !== current) mountPage(next)
+}
+
+function wirePageContent() {
+  const form = stage.querySelector('#contact-form')
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault()
+      const data = new FormData(form)
+      const nome = data.get('nome')?.toString().trim() || ''
+      const email = data.get('email')?.toString().trim() || ''
+      const telefone = data.get('telefone')?.toString().trim() || ''
+      const mensagem = data.get('mensagem')?.toString().trim() || ''
+      const body = [`Nome: ${nome}`, `Email: ${email}`, telefone ? `Telefone: ${telefone}` : '', '', mensagem].filter(Boolean).join('\n')
+      const mailto = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent('Pedido de orçamento - RR Technik')}&body=${encodeURIComponent(body)}`
+      const hint = form.querySelector('.form-hint')
+      if (hint) hint.textContent = 'A abrir o seu cliente de email…'
+      window.location.href = mailto
+      window.setTimeout(() => { if (hint) hint.textContent = hint.dataset.defaultText }, 4000)
+    })
+  }
+
+  stage.querySelectorAll('.photo-tile').forEach((tile) => {
+    tile.addEventListener('click', () => {
+      lightboxImg.src = tile.dataset.photoSrc
+      lightboxImg.alt = tile.dataset.photoAlt
+      lightboxCount.textContent = `${tile.dataset.photoIndex.padStart(2, '0')} / ${tile.dataset.photoTotal.padStart(2, '0')}`
+      lightbox.classList.add('is-open')
+      lightbox.setAttribute('aria-hidden', 'false')
+    })
+  })
+
+  stage.querySelectorAll('[data-go]').forEach((el) => {
+    el.addEventListener('click', () => goToId(el.dataset.go))
+  })
+}
+
+// -- global navigation wiring (chrome only renders once) --
+document.querySelectorAll('.tab, .mobile-tab, .brand').forEach((el) => {
+  el.addEventListener('click', () => {
+    goToId(el.dataset.go)
+    mobileNav.classList.remove('is-open')
+    menuToggle.setAttribute('aria-expanded', 'false')
+  })
 })
+document.querySelector('.pager-prev').addEventListener('click', () => goToIndex(current - 1))
+document.querySelector('.pager-next').addEventListener('click', () => goToIndex(current + 1))
+dots.forEach((dot) => dot.addEventListener('click', () => goToIndex(Number(dot.dataset.index))))
+menuToggle.addEventListener('click', () => {
+  const open = mobileNav.classList.toggle('is-open')
+  menuToggle.setAttribute('aria-expanded', String(open))
+  mobileNav.setAttribute('aria-hidden', String(!open))
+})
+lightbox.querySelector('.lightbox-close').addEventListener('click', () => {
+  lightbox.classList.remove('is-open')
+  lightbox.setAttribute('aria-hidden', 'true')
+})
+document.addEventListener('keydown', (event) => {
+  if (lightbox.classList.contains('is-open')) {
+    if (event.key === 'Escape') lightbox.querySelector('.lightbox-close').click()
+    return
+  }
+  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') goToIndex(current + 1)
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') goToIndex(current - 1)
+})
+let touchStartX = 0
+document.querySelector('.stage').addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX }, { passive: true })
+document.querySelector('.stage').addEventListener('touchend', (e) => {
+  const distance = e.changedTouches[0].screenX - touchStartX
+  if (Math.abs(distance) > 50) goToIndex(current + (distance < 0 ? 1 : -1))
+}, { passive: true })
+window.addEventListener('hashchange', () => goToId(window.location.hash.slice(1)))
+
+// -- initial mount --
+const initialId = window.location.hash.slice(1)
+const initialIndex = pages.findIndex((p) => p.id === initialId)
+mountPage(initialIndex >= 0 ? initialIndex : 0, { instant: true })
