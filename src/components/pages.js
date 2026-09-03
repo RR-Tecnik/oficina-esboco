@@ -154,6 +154,61 @@ function renderCopyForm(page) {
     </div>`
 }
 
+function renderServiceDoc(page) {
+  return `
+    <div class="service-doc">
+      <header class="service-doc-head">
+        <button class="back-link" type="button" data-go="services">&larr; Voltar aos serviços</button>
+        <p class="eyebrow">${esc(page.eyebrow)}</p>
+        <h1>${titleHTML(page.title)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+        ${page.intro ? `<p>${esc(page.intro)}</p>` : ''}
+      </header>
+
+      <section class="service-block">
+        <h2 class="service-block-title">${esc(page.plansTitle)}</h2>
+        <div class="plan-grid">
+          ${page.plans.map((plan) => `
+            <article class="plan-card${plan.feature ? ' is-feature' : ''}">
+              <span class="plan-tier">${esc(plan.tier)}</span>
+              <h3>${esc(plan.name)}</h3>
+              <p class="plan-desc">${esc(plan.desc)}</p>
+              <ul class="plan-list">${plan.items.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>
+            </article>`).join('')}
+        </div>
+      </section>
+
+      <section class="service-block">
+        <h2 class="service-block-title">${esc(page.intervalsTitle)}</h2>
+        <p>${esc(page.intervalsIntro)}</p>
+        <div class="interval-grid">
+          ${page.intervals.map((interval) => `
+            <div class="interval-item">
+              <p class="interval-label">${esc(interval.label)}</p>
+              <p>${esc(interval.text)}</p>
+            </div>`).join('')}
+        </div>
+      </section>
+
+      <section class="service-block service-block-split">
+        ${page.columns.map((col) => `
+          <div>
+            <h2 class="service-block-title">${esc(col.heading)}</h2>
+            <p>${esc(col.text)}</p>
+          </div>`).join('')}
+      </section>
+
+      <section class="service-block">
+        <h2 class="service-block-title">${esc(page.stepsTitle)}</h2>
+        <ol class="step-list">
+          ${page.steps.map((step, i) => `
+            <li><span class="step-n">${String(i + 1).padStart(2, '0')}</span><p>${esc(step)}</p></li>`).join('')}
+        </ol>
+        ${page.outro ? `<p class="service-outro">${esc(page.outro)}</p>` : ''}
+      </section>
+    </div>`
+}
+
 const RENDERERS = {
   cover: renderCover,
   'copy-photos': renderCopyPhotos,
@@ -163,6 +218,7 @@ const RENDERERS = {
   'copy-form': renderCopyForm,
   'project-grid': renderProjectGrid,
   'car-detail': renderCarDetail,
+  'service-doc': renderServiceDoc,
 }
 
 export function renderPage(page) {
