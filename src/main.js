@@ -16,16 +16,18 @@ const lightbox = document.querySelector('#lightbox')
 const lightboxImg = lightbox.querySelector('img')
 const lightboxCount = lightbox.querySelector('.lightbox-count')
 const sectionCount = pages.filter((page) => page.id === page.tabId?.replace('-cover', '')).length
+const carouselPages = pages.filter((page) => page.id === 'home' || page.id.endsWith('-cover'))
 
-dotsHost.innerHTML = pages.map((page, i) => `<button class="dot" type="button" data-index="${i}" aria-label="Ir para ${page.eyebrow}"></button>`).join('')
+dotsHost.innerHTML = carouselPages.map((page, i) => `<button class="dot" type="button" data-index="${i}" aria-label="Ir para ${page.eyebrow}"></button>`).join('')
 const dots = [...dotsHost.querySelectorAll('.dot')]
 
 let current = -1
 
 function setActiveChrome(index) {
   const page = pages[index]
+  const carouselIndex = carouselPages.findIndex((carouselPage) => carouselPage.id === (page.tabId || page.id))
   document.querySelectorAll('.tab, .mobile-tab').forEach((el) => el.classList.toggle('is-active', el.dataset.go === (page.tabId || page.id)))
-  dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index))
+  dots.forEach((dot, i) => dot.classList.toggle('is-active', i === carouselIndex))
   pagerFill.style.height = `${(Number(page.number) / sectionCount) * 100}%`
   pagerCount.textContent = `${page.number} / ${String(sectionCount).padStart(2, '0')}`
 }
@@ -60,9 +62,16 @@ function goToId(id) {
   if (index >= 0 && index !== current) mountPage(index)
 }
 
-function goToIndex(index) {
-  const next = (index + pages.length) % pages.length
+function goToIndex(direction) {
+  const currentCarouselIndex = carouselPages.findIndex((carouselPage) => carouselPage.id === (pages[current].tabId || pages[current].id))
+  const nextCarouselIndex = (currentCarouselIndex + direction + carouselPages.length) % carouselPages.length
+  const next = pages.findIndex((page) => page.id === carouselPages[nextCarouselIndex].id)
   if (next !== current) mountPage(next)
+}
+
+function goToCarouselIndex(index) {
+  const next = pages.findIndex((page) => page.id === carouselPages[index]?.id)
+  if (next >= 0 && next !== current) mountPage(next)
 }
 
 function wirePageContent() {
@@ -107,9 +116,9 @@ document.querySelectorAll('.tab, .mobile-tab, .brand').forEach((el) => {
     menuToggle.setAttribute('aria-expanded', 'false')
   })
 })
-document.querySelector('.pager-prev').addEventListener('click', () => goToIndex(current - 1))
-document.querySelector('.pager-next').addEventListener('click', () => goToIndex(current + 1))
-dots.forEach((dot) => dot.addEventListener('click', () => goToIndex(Number(dot.dataset.index))))
+document.querySelector('.pager-prev').addEventListener('click', () => goToIndex(-1))
+document.querySelector('.pager-next').addEventListener('click', () => goToIndex(1))
+dots.forEach((dot) => dot.addEventListener('click', () => goToCarouselIndex(Number(dot.dataset.index))))
 menuToggle.addEventListener('click', () => {
   const open = mobileNav.classList.toggle('is-open')
   menuToggle.setAttribute('aria-expanded', String(open))
@@ -124,14 +133,14 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') lightbox.querySelector('.lightbox-close').click()
     return
   }
-  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') goToIndex(current + 1)
-  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') goToIndex(current - 1)
+  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') goToIndex(1)
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') goToIndex(-1)
 })
 let touchStartX = 0
 document.querySelector('.stage').addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX }, { passive: true })
 document.querySelector('.stage').addEventListener('touchend', (e) => {
   const distance = e.changedTouches[0].screenX - touchStartX
-  if (Math.abs(distance) > 50) goToIndex(current + (distance < 0 ? 1 : -1))
+  if (Math.abs(distance) > 50) goToIndex(distance < 0 ? 1 : -1)
 }, { passive: true })
 window.addEventListener('hashchange', () => goToId(window.location.hash.slice(1)))
 
