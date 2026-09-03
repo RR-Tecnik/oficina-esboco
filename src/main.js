@@ -106,6 +106,24 @@ function wirePageContent() {
   stage.querySelectorAll('[data-go]').forEach((el) => {
     el.addEventListener('click', () => goToId(el.dataset.go))
   })
+
+  const guideToggle = stage.querySelector('.guide-toggle')
+  if (guideToggle) {
+    const buttons = [...guideToggle.querySelectorAll('.guide-toggle-btn')]
+    const panels = [...stage.querySelectorAll('.guide-panel')]
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.guideTarget
+        buttons.forEach((b) => {
+          const on = b === button
+          b.classList.toggle('is-active', on)
+          b.setAttribute('aria-selected', String(on))
+        })
+        panels.forEach((panel) => { panel.hidden = panel.dataset.guidePanel !== target })
+        stage.firstElementChild?.scrollTo({ top: 0 })
+      })
+    })
+  }
 }
 
 // -- global navigation wiring (chrome only renders once) --

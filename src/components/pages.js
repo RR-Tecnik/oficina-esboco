@@ -209,6 +209,55 @@ function renderServiceDoc(page) {
     </div>`
 }
 
+function guideVariantHTML(v) {
+  return `
+    <p class="lede">${esc(v.lede)}</p>
+    ${(v.intro || []).map((text) => `<p>${esc(text)}</p>`).join('')}
+
+    <section class="service-block">
+      <h2 class="service-block-title">${esc(v.areasTitle)}</h2>
+      <div class="area-grid">
+        ${v.areas.map((area) => `
+          <article class="area-card">
+            <h3>${esc(area.heading)}</h3>
+            <p>${esc(area.text)}</p>
+          </article>`).join('')}
+      </div>
+    </section>
+
+    <section class="service-block service-block-split">
+      ${v.columns.map((col) => `
+        <div>
+          <h2 class="service-block-title">${esc(col.heading)}</h2>
+          <p>${esc(col.text)}</p>
+        </div>`).join('')}
+    </section>
+
+    <section class="service-block">
+      <h2 class="service-block-title">${esc(v.stepsTitle)}</h2>
+      <ol class="step-list">
+        ${v.steps.map((step, i) => `
+          <li><span class="step-n">${String(i + 1).padStart(2, '0')}</span><p>${esc(step)}</p></li>`).join('')}
+      </ol>
+      ${v.outro ? `<p class="service-outro">${esc(v.outro)}</p>` : ''}
+    </section>`
+}
+
+function renderServiceGuide(page) {
+  return `
+    <div class="service-doc">
+      <header class="service-doc-head">
+        <button class="back-link" type="button" data-go="services">&larr; Voltar aos serviços</button>
+        <p class="eyebrow">${esc(page.eyebrow)}</p>
+        <h1>${titleHTML(page.title)}</h1>
+        <div class="guide-toggle" role="tablist" aria-label="${esc(page.title)}">
+          ${page.toggle.map((t, i) => `<button type="button" role="tab" class="guide-toggle-btn${i === 0 ? ' is-active' : ''}" data-guide-target="${esc(t.id)}" aria-selected="${i === 0 ? 'true' : 'false'}">${esc(t.label)}</button>`).join('')}
+        </div>
+      </header>
+      ${page.toggle.map((t, i) => `<div class="guide-panel" data-guide-panel="${esc(t.id)}"${i === 0 ? '' : ' hidden'}>${guideVariantHTML(page.variants[t.id])}</div>`).join('')}
+    </div>`
+}
+
 const RENDERERS = {
   cover: renderCover,
   'copy-photos': renderCopyPhotos,
@@ -219,6 +268,7 @@ const RENDERERS = {
   'project-grid': renderProjectGrid,
   'car-detail': renderCarDetail,
   'service-doc': renderServiceDoc,
+  'service-guide': renderServiceGuide,
 }
 
 export function renderPage(page) {

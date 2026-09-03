@@ -106,7 +106,7 @@ export const pages = [
     ],
     highlights: [
       { title: 'Manutenção', text: 'Revisões, diagnose e assistência mecânica para todas as marcas desportivas e premium.', target: 'manutencoes' },
-      { title: 'Modificações', text: 'Alterações e upgrades mecânicos e estéticos com rigor e documentação.', target: null },
+      { title: 'Modificações', text: 'Alterações e upgrades mecânicos e estéticos com rigor e documentação.', target: 'modificacoes' },
       { title: 'Reprogramações', text: 'Afinações eletrónicas e otimizações de ECU para maior performance e eficiência.', target: 'reprogramacoes' },
       { title: 'Vendas a consignação', text: 'Venda do seu veículo com gestão profissional, fotografia e divulgação.', target: null },
     ],
@@ -209,6 +209,73 @@ export const pages = [
       'Entrega do carro com explicação clara do trabalho executado e recomendações futuras.',
     ],
     outro: 'Sem surpresas na fatura. Sem venda de coisas que não são precisas.',
+  },
+  {
+    id: 'modificacoes',
+    tabId: 'services-cover',
+    kind: 'service-guide',
+    number: '02',
+    eyebrow: '02 · Modificações',
+    title: 'Modificações.',
+    toggle: [
+      { id: 'estrada', label: 'Estrada & Premium' },
+      { id: 'competicao', label: 'Carros de competição' },
+    ],
+    variants: {
+      estrada: {
+        lede: 'Modificar um carro de performance não é substituir uma peça por outra mais cara. É perceber como cada alteração afeta o resto do carro — a suspensão que se ajusta ao novo peso do escape, a eletrónica que precisa de ser recalibrada depois de um upgrade de admissão, o travão que passa a ter de responder a mais potência. Cada modificação é pensada como parte de um sistema, não como uma peça isolada.',
+        intro: [
+          'Trabalhamos com carros desportivos e de marcas premium, sempre com o mesmo critério: só se instala o que faz sentido para aquele carro e para o uso que o cliente lhe vai dar.',
+        ],
+        areasTitle: 'As nossas áreas de intervenção',
+        areas: [
+          { heading: 'Escapes e admissão', text: 'Substituição de sistemas de escape e admissão por soluções de maior fluxo, com verificação de decibéis e homologação quando aplicável. Reprogramação da eletrónica sempre que a alteração o justifique, para que o motor trabalhe com os mapas corretos — não apenas com mais ruído.' },
+          { heading: 'Suspensão e travões', text: 'Instalação de coilovers e suspensão regulável, com afinação de geometria feita à medida do uso — estrada, misto ou pista. Upgrade de travões, incluindo kits de maior diâmetro e composto de pastilha específico, com purga de fluido de alto ponto de ebulição sempre que o uso o exigir.' },
+          { heading: 'Reprogramação eletrónica', text: 'Otimização dos mapas de motor em banco de potência próprio, com medição real de potência e binário antes e depois de cada afinação — nunca números de catálogo. Cada reprogramação é documentada, com o ficheiro original guardado.' },
+          { heading: 'Radiadores e arrefecimento', text: 'Instalação de radiadores e intercoolers de maior capacidade para carros que vão trabalhar sob carga sustentada, seja em pista ou em uso exigente na estrada.' },
+          { heading: 'Rigidez estrutural', text: 'Instalação de rollbar e rollcage para quem compete ou faz uso intensivo em pista, sempre com atenção aos requisitos de segurança e homologação aplicáveis.' },
+        ],
+        columns: [
+          { heading: 'Os mais altos padrões', text: 'Cada modificação é instalada com o mesmo rigor de uma revisão: binário correto em cada parafuso, verificado com chave dinamométrica calibrada, e testada antes de o carro sair da oficina. Uma alteração mal instalada não é modificação — é um risco. Por isso, cada intervenção é documentada, com relatório fotográfico e explicação clara do que foi feito e porquê.' },
+          { heading: 'Produtos e parceiros', text: 'Só instalamos peças de marcas de referência reconhecidas no mundo da performance, com histórico comprovado em competição e uso intensivo. Nada de peças genéricas nem de compromissos na qualidade.' },
+        ],
+        stepsTitle: 'Como funciona',
+        steps: [
+          'Conversa inicial para perceber o objetivo — mais potência, melhor comportamento em pista, ou ambos.',
+          'Proposta técnica com as opções mais adequadas ao carro e ao orçamento disponível.',
+          'Instalação com relatório fotográfico de cada etapa.',
+          'Teste em banco de potência ou em estrada, conforme a modificação.',
+          'Entrega do carro com explicação clara do que foi feito e das recomendações de manutenção associadas.',
+        ],
+        outro: 'Sem promessas de números que não se confirmam na prática. Sem instalar o que não vai servir o carro.',
+      },
+      competicao: {
+        lede: 'Preparar um carro para competir é diferente de o preparar para um trackday. Aqui não há margem para "quase" — há um regulamento técnico a cumprir, uma grelha de partida à espera, e um carro que tem de aguentar o ritmo de uma prova inteira, não apenas umas voltas de lazer. Trabalhamos com essa exigência em mente, do primeiro parafuso ao último detalhe.',
+        intro: [],
+        areasTitle: 'As nossas áreas de intervenção',
+        areas: [
+          { heading: 'Conformidade técnica e homologação', text: 'Preparação do carro de acordo com o regulamento técnico da modalidade — circuito, ralis ou endurance — com verificação de todos os pontos que costumam travar um carro nas verificações técnicas. Preferimos encontrar o problema na oficina do que no parque fechado.' },
+          { heading: 'Estruturas de segurança', text: 'Instalação de rollcage certificado, bancos e cintos homologados, corta-correntes e sistema de extinção, sempre de acordo com os requisitos de segurança aplicáveis à prova. Segurança não é opcional nem negociável.' },
+          { heading: 'Otimização de peso', text: 'Aligeiramento do carro dentro dos limites regulamentares — porque em competição, cada quilo a menos é tempo ganho, mas só conta se for feito sem comprometer a estrutura ou a segurança.' },
+          { heading: 'Motor e transmissão', text: 'Preparação de motor para uso em competição, embraiagens reforçadas e diferenciais adequados à modalidade, com afinação em banco de potência para garantir fiabilidade ao longo de toda a prova — não só um número de potência no papel.' },
+          { heading: 'Telemetria e análise de dados', text: 'Instalação de sistemas de aquisição de dados para analisar o comportamento do carro e do piloto prova após prova. Os dados não mentem, e são a forma mais rápida de encontrar tempo sem arriscar mais em pista.' },
+          { heading: 'Apoio em prova', text: 'Assistência técnica no dia da competição, com equipa e material preparados para intervir entre sessões — porque um carro parado nas boxes não pontua.' },
+        ],
+        columns: [
+          { heading: 'Os mais altos padrões', text: 'Cada parafuso é apertado ao binário exato especificado para aquele ponto, verificado com chave dinamométrica calibrada, sem exceções mesmo sob pressão de tempo antes de uma prova. Cada intervenção é documentada, para que o histórico do carro esteja sempre disponível para verificação técnica ou análise posterior.' },
+          { heading: 'Produtos e parceiros', text: 'Só instalamos componentes de competição de marcas de referência reconhecidas no motorsport, com histórico comprovado em pista. Em segurança e fiabilidade, não há espaço para compromissos.' },
+        ],
+        stepsTitle: 'Como funciona',
+        steps: [
+          'Conversa inicial para perceber a modalidade, o regulamento aplicável e o calendário de provas.',
+          'Proposta técnica com o que é necessário para colocar o carro em conformidade e competitivo.',
+          'Preparação e instalação, com relatório fotográfico de cada etapa.',
+          'Teste em banco de potência e em pista antes da primeira prova.',
+          'Acompanhamento contínuo ao longo da época, com manutenção entre provas.',
+        ],
+        outro: 'Um carro de competição não perdoa erros. Nem nós.',
+      },
+    },
   },
   {
     id: 'projects-cover',
