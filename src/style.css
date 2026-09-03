@@ -130,6 +130,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; over
 /* highlight list (services) */
 .highlight-list { list-style: none; margin: 0 0 0 16px; padding: 0; display: grid; gap: 10px; }
 .highlight-list li { padding: 14px 16px; background: var(--panel); border: 1px solid var(--panel-line); box-shadow: 0 8px 24px rgba(23, 32, 27, .05); }
+.highlight-list li[data-go] { cursor: pointer; transition: background .2s, border-color .2s; }
+.highlight-list li[data-go]:hover { background: rgba(255,255,255,.04); border-color: var(--accent); }
 .highlight-list h3 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
 .highlight-list p { font-size: 12.5px; color: var(--ink-dim); margin: 0; }
 
@@ -199,11 +201,11 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; over
     max-width: none;
     padding: clamp(20px, 4vh, 40px) 8vw 14px 4vw;
     display: grid;
-    grid-template-columns: minmax(0, .65fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, .7fr) minmax(0, 1fr);
     grid-template-rows: auto auto auto auto auto;
-    column-gap: clamp(20px, 3vw, 60px);
+    column-gap: clamp(24px, 3.5vw, 72px);
     align-content: start;
-    background-image: linear-gradient(90deg, transparent 0, transparent calc(42% - 1px), rgba(255, 255, 255, .08) 42%, transparent calc(42% + 1px));
+    background-image: linear-gradient(90deg, transparent 0, transparent calc(40% - 1px), rgba(255, 255, 255, .08) 40%, transparent calc(40% + 1px));
   }
   .page-no-visual .eyebrow { grid-column: 1; grid-row: 1; }
   .page-no-visual h1 { grid-column: 1; grid-row: 2; }

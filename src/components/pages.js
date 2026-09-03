@@ -49,7 +49,7 @@ function renderCopyList(page) {
       ${bodyHTML(page.body)}
     </div>
     <div class="page-visual">
-      <ul class="highlight-list">${page.highlights.map((h) => `<li><h3>${esc(h.title)}</h3><p>${esc(h.text)}</p></li>`).join('')}</ul>
+      <ul class="highlight-list">${page.highlights.map((h) => `<li${h.target ? ` data-go="${esc(h.target)}"` : ''}><h3>${esc(h.title)}</h3><p>${esc(h.text)}</p></li>`).join('')}</ul>
     </div>`
 }
 

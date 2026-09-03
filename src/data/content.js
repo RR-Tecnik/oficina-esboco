@@ -24,12 +24,16 @@ const workshopPhotos = [
   'https://cdn.discordapp.com/attachments/1525626598429167648/1544845223731929118/f5ba2cd5-2a59-47aa-930b-89dfde7e0137.jpg?ex=6a99fcbb&is=6a98ab3b&hm=b7a0058a5472559c70772bd5a1a0dd2e68145486a52ddca37f178c505d6d5065&',
   'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224377847869/2832d913-5ab7-4db9-bedb-46c6c03fd57d.jpg?ex=6a99fcbb&is=6a98ab3b&hm=bdedcb1a4d3cec9b10f8b927ef6e4802b52820bce86491ddd3104ea905f2c62f&',
   'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224084512818/1979e75d-9dbb-417d-bd37-99e903ef1d58.jpg?ex=6a99fcbb&is=6a98ab3b&hm=b17cb50e14d064f662db5b3afa68d7917a69584635cab0895dd4eb3e4512c89b&',
+  'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=2400&q=90',
+  'https://i.imgur.com/8KjB9QY.jpeg',
+  'https://i.imgur.com/3R2kF4L.jpeg',
+  'https://i.imgur.com/9P5vH8N.jpeg',
 ]
 
 const carCoverPhotos = [
-  'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=2400&q=90',
+  'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=2400&q=90',
   'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2400&q=90',
-  'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2400&q=90',
+  'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=2400&q=90',
   'https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=2400&q=90',
 ]
 
@@ -80,7 +84,7 @@ export const pages = [
     eyebrow: '02 · Serviços',
     title: 'Serviços.',
     lede: 'Manutenção, modificações, reprogramações e vendas a consignação para carros que pedem mais.',
-    image: carCoverPhotos[1],
+    image: carCoverPhotos[0],
     cta: { label: 'Ver serviços', target: 'services' },
   },
   {
@@ -96,10 +100,27 @@ export const pages = [
       { text: 'Cada orçamento é apresentado antes do trabalho começar, com tudo explicado, para que a decisão seja sempre sua.' },
     ],
     highlights: [
-      { title: 'Manutenção', text: 'Revisões, diagnose e assistência mecânica para todas as marcas desportivas e premium.' },
-      { title: 'Modificações', text: 'Alterações e upgrades mecânicos e estéticos com rigor e documentação.' },
-      { title: 'Reprogramações', text: 'Afinações eletrónicas e otimizações de ECU para maior performance e eficiência.' },
-      { title: 'Vendas a consignação', text: 'Venda do seu veículo com gestão profissional, fotografia e divulgação.' },
+      { title: 'Manutenção', text: 'Revisões, diagnose e assistência mecânica para todas as marcas desportivas e premium.', target: null },
+      { title: 'Modificações', text: 'Alterações e upgrades mecânicos e estéticos com rigor e documentação.', target: null },
+      { title: 'Reprogramações', text: 'Afinações eletrónicas e otimizações de ECU para maior performance e eficiência.', target: 'reprogramacoes' },
+      { title: 'Vendas a consignação', text: 'Venda do seu veículo com gestão profissional, fotografia e divulgação.', target: null },
+    ],
+  },
+  {
+    id: 'reprogramacoes',
+    tabId: 'services-cover',
+    kind: 'copy-photos',
+    number: '02',
+    eyebrow: '02 · Reprogramações',
+    title: 'Reprogramações.',
+    lede: 'Afinações eletrónicas e otimizações de ECU para maior performance e eficiência.',
+    body: [
+      { text: 'Trabalhamos com banco de potência próprio e software de última geração para garantir resultados seguros e fiáveis.' },
+    ],
+    photos: [
+      '/reprogramacoes/reprogramacao-1.jpg',
+      '/reprogramacoes/reprogramacao-2.jpg',
+      '/reprogramacoes/reprogramacao-3.jpg',
     ],
   },
   {
@@ -110,7 +131,7 @@ export const pages = [
     eyebrow: '03 · Projetos',
     title: 'Projetos.',
     lede: 'Carros, intervenções e resultados construídos com rigor.',
-    image: carCoverPhotos[1],
+    image: carCoverPhotos[2],
     cta: { label: 'Ver projetos', target: 'projects' },
   },
   {
@@ -161,7 +182,7 @@ export const pages = [
     eyebrow: '05 · Contactos e marcações',
     title: 'Fale connosco.',
     lede: 'O próximo capítulo do seu carro começa aqui.',
-    image: carCoverPhotos[2],
+    image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=2400&q=90',
     cta: { label: 'Contactar', target: 'contact' },
   },
   {
