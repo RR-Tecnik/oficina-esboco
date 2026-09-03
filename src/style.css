@@ -135,6 +135,23 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; over
 .highlight-list h3 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
 .highlight-list p { font-size: 12.5px; color: var(--ink-dim); margin: 0; }
 
+/* project grid (projects tab: one big tile per car) */
+.project-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.project-tile { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; border: 0; padding: 0; cursor: pointer; background: var(--panel); }
+.project-tile img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) contrast(1.05); transition: transform .5s; }
+.project-tile:hover img { transform: scale(1.05); }
+.project-tile-shade { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,12,13,.88) 0%, rgba(10,12,13,.25) 45%, rgba(10,12,13,0) 70%); }
+.project-tile-label { position: absolute; left: 16px; right: 16px; bottom: 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.project-tile-name { font-family: var(--font-display); font-weight: 600; font-size: 17px; color: #fff; }
+.project-tile-cta { font-size: 12px; color: rgba(255,255,255,.78); white-space: nowrap; }
+
+/* car detail (single project page) */
+.back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 14px; padding: 0; border: 0; background: none; color: var(--accent); font-size: 13px; cursor: pointer; }
+.back-link:hover { text-decoration: underline; }
+.spec-list { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 6px; }
+.spec-list li { position: relative; padding-left: 14px; font-size: 13px; line-height: 1.5; color: var(--ink-dim); max-width: 62ch; }
+.spec-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; background: var(--accent); }
+
 /* partner grid */
 .partner-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--panel-line); border: 1px solid var(--panel-line); }
 .partner-grid span { background: var(--bg); display: grid; place-items: center; height: 60px; font-family: var(--font-display); font-size: 16px; letter-spacing: .02em; color: var(--ink); }
@@ -231,6 +248,10 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; over
 
   .photo-grid { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; height: 100%; }
   .photo-grid .photo-tile { aspect-ratio: auto; }
+
+  .project-grid { height: 100%; grid-template-rows: repeat(3, 1fr); gap: 12px; }
+  .project-tile { aspect-ratio: auto; height: 100%; }
+  .project-tile-name { font-size: 20px; }
   .photo-grid .photo-tile:first-child { grid-row: span 2; }
 
   .highlight-list { max-height: 100%; overflow-y: auto; }

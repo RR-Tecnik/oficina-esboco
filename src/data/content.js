@@ -1,9 +1,7 @@
-// Resolve assets guardados em /public tendo em conta o "base" configurado
-// no vite.config.js (ex: '/oficina-esboco/'). Sem isto, um caminho absoluto
-// como '/reprogramacoes/foto.jpg' escrito diretamente numa string ignora o
-// base path e parte de imagens quando o site é publicado numa subpasta
-// (como acontece no GitHub Pages).
-const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+import { asset } from './asset.js'
+import { cars } from './cars.js'
+
+export { cars }
 
 export const brand = {
   mark: 'RR',
@@ -146,7 +144,7 @@ export const pages = [
   {
     id: 'projects',
     tabId: 'projects-cover',
-    kind: 'copy-photos',
+    kind: 'project-grid',
     number: '03',
     eyebrow: '03 · Projetos',
     title: 'Cada carro,\numa história.',
@@ -154,9 +152,16 @@ export const pages = [
     body: [
       { text: 'Esta é a montra desse trabalho: os carros, as intervenções, os resultados. Uma forma de mostrar, e não apenas dizer, o que significa rigor aplicado à performance.' },
     ],
-    note: 'Secção a atualizar com os primeiros projetos',
-    photos: workshopPhotos,
+    cars,
   },
+  ...cars.map((car) => ({
+    id: car.id,
+    tabId: 'projects-cover',
+    kind: 'car-detail',
+    number: '03',
+    eyebrow: '03 · Projetos',
+    car,
+  })),
   {
     id: 'location-cover',
     tabId: 'location-cover',

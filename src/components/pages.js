@@ -40,6 +40,50 @@ function renderCopyPhotos(page) {
     ${page.photos?.length ? `<div class="page-visual">${photoGrid(page.photos, page.title.replace('\n', ' '))}</div>` : ''}`
 }
 
+function renderProjectGrid(page) {
+  return `
+    <div class="page-copy">
+      <p class="eyebrow">${esc(page.eyebrow)}</p>
+      <h1>${titleHTML(page.title)}</h1>
+      <p class="lede">${esc(page.lede)}</p>
+      ${bodyHTML(page.body)}
+    </div>
+    <div class="page-visual">
+      <div class="project-grid">
+        ${page.cars.map((car) => `
+          <button class="project-tile" type="button" data-go="${car.id}" aria-label="Ver ${esc(car.name)}">
+            <img src="${car.cover}" alt="${esc(car.name)}" loading="lazy">
+            <span class="project-tile-shade"></span>
+            <span class="project-tile-label">
+              <span class="project-tile-name">${esc(car.name)}</span>
+              <span class="project-tile-cta">Ver projeto →</span>
+            </span>
+          </button>`).join('')}
+      </div>
+    </div>`
+}
+
+function specSections(specs = []) {
+  return specs.map((section) => `
+    <h2>${esc(section.heading)}</h2>
+    <ul class="spec-list">${section.items.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>
+  `).join('')
+}
+
+function renderCarDetail(page) {
+  const car = page.car
+  return `
+    <div class="page-copy">
+      <button class="back-link" type="button" data-go="projects">&larr; Voltar aos projetos</button>
+      <p class="eyebrow">${esc(page.eyebrow)}</p>
+      <h1>${titleHTML(car.name)}</h1>
+      ${car.tagline ? `<p class="lede">${esc(car.tagline)}</p>` : ''}
+      ${car.intro ? `<p>${esc(car.intro)}</p>` : ''}
+      ${specSections(car.specs)}
+    </div>
+    <div class="page-visual">${photoGrid(car.photos, car.name)}</div>`
+}
+
 function renderCopyList(page) {
   return `
     <div class="page-copy">
@@ -117,6 +161,8 @@ const RENDERERS = {
   'copy-logos': renderCopyLogos,
   'copy-map': renderCopyMap,
   'copy-form': renderCopyForm,
+  'project-grid': renderProjectGrid,
+  'car-detail': renderCarDetail,
 }
 
 export function renderPage(page) {
