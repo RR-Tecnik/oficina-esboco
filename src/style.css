@@ -380,7 +380,8 @@ body { background: var(--bg); }
 .page-copy .lede { font-weight: 500; }
 .page-visual { padding-top: 5vh; padding-bottom: 5vh; }
   .page-visual > * { box-shadow: none; }
-  .photo-grid { gap: 6px; }
+  .photo-grid { gap: 6px; grid-template-columns: repeat(2, 1fr); }
+  .photo-grid .photo-tile:first-child { grid-row: span 1; }
   .highlight-list li { box-shadow: none; border-left: 3px solid var(--accent); }
 .contact-form { box-shadow: 18px 18px 0 rgba(23,32,27,.06); }
 .pager { background: rgba(255,255,255,.94); border-top-color: var(--ink); }
