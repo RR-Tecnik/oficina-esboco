@@ -2,6 +2,11 @@ export const brand = {
   mark: 'RR',
   name: 'Technik Performance',
   location: 'Valongo · Portugal',
+  address: 'Rua do Negral 1007',
+  country: 'Valongo, Portugal',
+  hours: 'Seg – Sex, 08:30 – 18:00',
+  email: 'cardosorodrigo1000@gmail.com',
+  phone: '960 455 763',
 }
 
 // Keep the tab order aligned with the page order below.
@@ -25,6 +30,7 @@ const carCoverPhotos = [
   'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=2400&q=90',
   'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2400&q=90',
   'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2400&q=90',
+  'https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=2400&q=90',
 ]
 
 // Each entry is one full-screen page. `kind` decides which layout
@@ -39,7 +45,7 @@ export const pages = [
     title: 'Performance,\ncom propósito.',
     lede: 'Um atelier independente para máquinas que pedem mais. Engenharia, detalhe e paixão reunidos no mesmo lugar.',
     image: 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=2400&q=90',
-    cta: { label: 'Conhecer o atelier', target: 'about' },
+    cta: { label: 'Conhecer a oficina', target: 'about' },
   },
   {
     id: 'about-cover',
@@ -49,7 +55,7 @@ export const pages = [
     eyebrow: '01 · Sobre nós',
     title: 'Sobre nós.',
     lede: 'Conheça a oficina, os critérios e a ambição por trás de cada intervenção.',
-    image: carCoverPhotos[0],
+    image: carCoverPhotos[3],
     cta: { label: 'Conhecer', target: 'about' },
   },
   {

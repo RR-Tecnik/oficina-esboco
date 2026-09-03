@@ -29,6 +29,29 @@ export function renderShell(brand, nav, pageCount) {
 
       <div class="pager-dots" id="pager-dots"></div>
 
+      <footer class="site-footer">
+        <div class="footer-brand">
+          <strong>${brand.mark}</strong>
+          <span>${brand.name}</span>
+        </div>
+        <nav class="footer-nav" aria-label="Explorar">
+          <p>Explorar</p>
+          ${nav.slice(0, 2).map((item) => `<button class="footer-link" type="button" data-go="${item.id}">${item.label}</button>`).join('')}
+        </nav>
+        <nav class="footer-nav" aria-label="RR Technik">
+          <p>RR Technik</p>
+          ${nav.slice(2).map((item) => `<button class="footer-link" type="button" data-go="${item.id}">${item.label}</button>`).join('')}
+        </nav>
+        <div class="footer-contact">
+          <p>Visite-nos</p>
+          <span>${brand.address}</span>
+          <span>${brand.country}</span>
+          <span>${brand.hours}</span>
+          <a href="mailto:${brand.email}">${brand.email}</a>
+          <a href="tel:${brand.phone.replace(/\s/g, '')}">${brand.phone}</a>
+        </div>
+      </footer>
+
       <aside class="lightbox" id="lightbox" aria-hidden="true">
         <button class="lightbox-close" type="button" aria-label="Fechar imagem">×</button>
         <img src="" alt="">

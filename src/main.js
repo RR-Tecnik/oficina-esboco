@@ -109,7 +109,7 @@ function wirePageContent() {
 }
 
 // -- global navigation wiring (chrome only renders once) --
-document.querySelectorAll('.tab, .mobile-tab, .brand').forEach((el) => {
+document.querySelectorAll('.tab, .mobile-tab, .footer-link, .brand').forEach((el) => {
   el.addEventListener('click', () => {
     goToId(el.dataset.go)
     mobileNav.classList.remove('is-open')
