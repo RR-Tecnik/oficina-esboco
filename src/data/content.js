@@ -1,3 +1,10 @@
+// Resolve assets guardados em /public tendo em conta o "base" configurado
+// no vite.config.js (ex: '/oficina-esboco/'). Sem isto, um caminho absoluto
+// como '/reprogramacoes/foto.jpg' escrito diretamente numa string ignora o
+// base path e parte de imagens quando o site é publicado numa subpasta
+// (como acontece no GitHub Pages).
+const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+
 export const brand = {
   mark: 'RR',
   name: 'Technik Performance',
@@ -19,11 +26,11 @@ export const nav = [
 ]
 
 const workshopPhotos = [
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845225124438097/4913ab13-87de-4ec6-88e4-6430eb430afa.jpg?ex=6a99fcbb&is=6a98ab3b&hm=598b3b5b9937dd82d707dc4f2299bb590d71c499d42eaf6786bb5307191e664c&',
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224709324830/ff63a536-27e1-448b-b126-535eaf611a50.jpg?ex=6a99fcbb&is=6a98ab3b&hm=e4d567e788f82ed59b41631677424eb385ede288b367e86409be2c7fd058d589&',
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845223731929118/f5ba2cd5-2a59-47aa-930b-89dfde7e0137.jpg?ex=6a99fcbb&is=6a98ab3b&hm=b7a0058a5472559c70772bd5a1a0dd2e68145486a52ddca37f178c505d6d5065&',
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224377847869/2832d913-5ab7-4db9-bedb-46c6c03fd57d.jpg?ex=6a99fcbb&is=6a98ab3b&hm=bdedcb1a4d3cec9b10f8b927ef6e4802b52820bce86491ddd3104ea905f2c62f&',
-  'https://cdn.discordapp.com/attachments/1525626598429167648/1544845224084512818/1979e75d-9dbb-417d-bd37-99e903ef1d58.jpg?ex=6a99fcbb&is=6a98ab3b&hm=b17cb50e14d064f662db5b3afa68d7917a69584635cab0895dd4eb3e4512c89b&',
+  asset('/workshop/workshop-1.jpg'),
+  asset('/workshop/workshop-2.jpg'),
+  asset('/workshop/workshop-3.jpg'),
+  asset('/workshop/workshop-4.jpg'),
+  asset('/workshop/workshop-5.jpg'),
   'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=2400&q=90',
   'https://i.imgur.com/8KjB9QY.jpeg',
   'https://i.imgur.com/3R2kF4L.jpeg',
@@ -118,9 +125,11 @@ export const pages = [
       { text: 'Trabalhamos com banco de potência próprio e software de última geração para garantir resultados seguros e fiáveis.' },
     ],
     photos: [
-      '/reprogramacoes/reprogramacao-1.jpg',
-      '/reprogramacoes/reprogramacao-2.jpg',
-      '/reprogramacoes/reprogramacao-3.jpg',
+      asset('/reprogramacoes/reprogramacao-1.jpg'),
+      asset('/reprogramacoes/reprogramacao-2.jpg'),
+      asset('/reprogramacoes/reprogramacao-3.jpg'),
+      asset('/reprogramacoes/reprogramacao-4.jpg'),
+      asset('/reprogramacoes/reprogramacao-5.jpg'),
     ],
   },
   {
