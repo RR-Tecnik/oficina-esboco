@@ -161,12 +161,13 @@ function renderCopyForm(page) {
     <div class="page-visual">
       <form class="contact-form" id="contact-form" novalidate data-mailto="${page.email}">
         <p class="info-label">Pedido de orçamento</p>
-        <label>Nome<input type="text" name="nome" required></label>
-        <label>Email<input type="email" name="email" required></label>
-        <label>Telefone (opcional)<input type="tel" name="telefone"></label>
+        <label>Nome<input type="text" name="nome" autocomplete="name" required></label>
+        <label>Email<input type="email" name="email" autocomplete="email" required></label>
+        <label>Telefone (opcional)<input type="tel" name="telefone" autocomplete="tel"></label>
         <label>Mensagem<textarea name="mensagem" rows="4" required placeholder="Conte-nos sobre o seu carro e o que precisa..."></textarea></label>
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
         <button type="submit" class="cta cta-block">Enviar pedido</button>
-        <p class="form-hint" data-default-text="Ao enviar, abrimos o seu cliente de email com a mensagem pronta.">Ao enviar, abrimos o seu cliente de email com a mensagem pronta.</p>
+        <p class="form-hint" data-default-text="Respondemos a todos os pedidos, normalmente em 1–2 dias úteis.">Respondemos a todos os pedidos, normalmente em 1–2 dias úteis.</p>
       </form>
     </div>`
 }

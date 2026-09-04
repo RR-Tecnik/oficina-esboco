@@ -77,19 +77,83 @@ function goToCarouselIndex(index) {
 function wirePageContent() {
   const form = stage.querySelector('#contact-form')
   if (form) {
-    form.addEventListener('submit', (event) => {
+    const hint = form.querySelector('.form-hint')
+    const submitButton = form.querySelector('button[type="submit"]')
+    const setHint = (text, state) => {
+      if (!hint) return
+      hint.textContent = text
+      hint.classList.remove('is-ok', 'is-error')
+      hint.style.cursor = ''
+      hint.onclick = null
+      if (state) hint.classList.add(state)
+    }
+    const resetHintLater = () => window.setTimeout(() => {
+      if (hint && !hint.classList.contains('is-ok')) setHint(hint.dataset.defaultText)
+    }, 8000)
+
+    form.addEventListener('submit', async (event) => {
       event.preventDefault()
       const data = new FormData(form)
+      if (data.get('botcheck')) return // honeypot tripped
+
       const nome = data.get('nome')?.toString().trim() || ''
       const email = data.get('email')?.toString().trim() || ''
       const telefone = data.get('telefone')?.toString().trim() || ''
       const mensagem = data.get('mensagem')?.toString().trim() || ''
+      const emailOk = /^\S+@\S+\.\S+$/.test(email)
+
+      if (!nome || !emailOk || !mensagem) {
+        setHint('Preencha o nome, um email válido e a mensagem.', 'is-error')
+        form.querySelector(!nome ? '[name="nome"]' : !emailOk ? '[name="email"]' : '[name="mensagem"]')?.focus()
+        return
+      }
+
+      const subject = 'Pedido de orçamento — RR Technik'
       const body = [`Nome: ${nome}`, `Email: ${email}`, telefone ? `Telefone: ${telefone}` : '', '', mensagem].filter(Boolean).join('\n')
-      const mailto = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent('Pedido de orçamento - RR Technik')}&body=${encodeURIComponent(body)}`
-      const hint = form.querySelector('.form-hint')
-      if (hint) hint.textContent = 'A abrir o seu cliente de email…'
-      window.location.href = mailto
-      window.setTimeout(() => { if (hint) hint.textContent = hint.dataset.defaultText }, 4000)
+      const mailto = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      const key = brand.web3formsKey?.trim()
+
+      if (!key) {
+        setHint('A abrir o seu email…')
+        window.location.href = mailto
+        resetHintLater()
+        return
+      }
+
+      if (submitButton) submitButton.disabled = true
+      setHint('A enviar…')
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: key,
+            subject,
+            from_name: nome,
+            name: nome,
+            email,
+            telefone: telefone || '—',
+            message: mensagem,
+            botcheck: '',
+          }),
+        })
+        const out = await res.json().catch(() => ({}))
+        if (res.ok && out.success) {
+          form.reset()
+          setHint('Pedido enviado. Respondemos em breve.', 'is-ok')
+        } else {
+          throw new Error(out.message || 'erro')
+        }
+      } catch (error) {
+        setHint('Não deu para enviar agora — toque para enviar por email.', 'is-error')
+        if (hint) {
+          hint.style.cursor = 'pointer'
+          hint.onclick = () => { window.location.href = mailto }
+        }
+        resetHintLater()
+      } finally {
+        if (submitButton) submitButton.disabled = false
+      }
     })
   }
 

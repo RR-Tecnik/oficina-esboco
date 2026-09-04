@@ -12,6 +12,9 @@ export const brand = {
   hours: 'Seg – Sex, 08:30 – 18:00',
   email: 'cardosorodrigo1000@gmail.com',
   phone: '960 455 763',
+  // Envio real do formulário de contacto (sem servidor), via web3forms.com.
+  // Chave associada ao email acima; se vazia, o formulário abre o email do cliente.
+  web3formsKey: '4fe49f95-bc4b-49f1-ad68-e4909267455f',
 }
 
 // Keep the tab order aligned with the page order below.

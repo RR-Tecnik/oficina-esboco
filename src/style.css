@@ -12,6 +12,8 @@
   --ink-mute: #9aa09b;
   --accent: #0f7ec0;
   --accent-ink: #f2fbff;
+  --ok: #3ea76b;
+  --danger: #e6584d;
   --font-display: 'Anton', 'Arial Narrow', 'Impact', sans-serif;  /* big titles only */
   --font-label: 'Exo 2', sans-serif;                              /* small uppercase labels */
   --font-wordmark: 'Orbitron', 'Anton', sans-serif;
@@ -786,6 +788,11 @@ body { overflow-x: hidden; overflow-y: auto; }
     padding-top: clamp(22px, 5vh, 48px);
   }
 }
+
+/* contact form: submit states */
+.contact-form button[type="submit"]:disabled { opacity: .55; cursor: progress; }
+.form-hint.is-ok { color: var(--ok); }
+.form-hint.is-error { color: var(--danger); }
 .page-copy h1,
 .service-doc h1,
 .page-cover .cover-copy h1 { line-height: .98; }
