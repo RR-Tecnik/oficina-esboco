@@ -559,9 +559,10 @@ body { overflow-x: hidden; overflow-y: auto; }
 .pager { position: fixed; }
 .page:not(.page-cover) { padding-top: var(--topbar-h); }
 
-/* ---------- service doc (Manutenções / Modificações) ---------- */
+/* ---------- service doc (Manutenções / Modificações / Reprogramações) ---------- */
 .page.page-service-doc,
-.page.page-service-guide {
+.page.page-service-guide,
+.page.page-reprog {
   flex-direction: column;
   align-items: stretch;
   overflow-y: auto;
@@ -713,6 +714,15 @@ body { overflow-x: hidden; overflow-y: auto; }
   color: var(--ink); margin: 0 0 10px;
 }
 .area-card p { margin: 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-dim); max-width: none; }
+
+/* reprogramações photo gallery */
+.reprog-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.reprog-gallery .photo-tile { aspect-ratio: 4 / 3; }
+.reprog-gallery .photo-tile.is-hero { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
+@media (max-width: 700px) {
+  .reprog-gallery { gap: 8px; }
+  .reprog-gallery .photo-tile.is-hero { aspect-ratio: 16 / 10; }
+}
 
 @media (max-width: 900px) {
   .plan-grid, .interval-grid, .service-block-split, .area-grid { grid-template-columns: 1fr; }

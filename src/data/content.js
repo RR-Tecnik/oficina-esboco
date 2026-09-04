@@ -32,12 +32,13 @@ const workshopPhotos = [
   asset('/workshop/workshop-4.jpg'),
 ]
 
-const carCoverPhotos = [
-  'https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=2400&q=90',
-  'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2400&q=90',
-  'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=2400&q=90',
-  'https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&w=2400&q=90',
-]
+// Fotos de capa das secções. About/Services usam Unsplash em alta resolução
+// (uso comercial livre, sem atribuição); Projetos é ficheiro local.
+const cover = {
+  about: 'https://images.unsplash.com/photo-1548105298-9c5940aa41d6?auto=format&fit=crop&w=2400&q=88',
+  services: 'https://images.unsplash.com/photo-1759646848326-446c3e012484?auto=format&fit=crop&w=2400&q=88',
+  projects: asset('/covers/projects.jpg'),
+}
 
 // Each entry is one full-screen page. `kind` decides which layout
 // template renders it (see components/pages.js). Arrows, dots and tabs
@@ -61,7 +62,7 @@ export const pages = [
     eyebrow: '01 · Sobre nós',
     title: 'Sobre nós.',
     lede: 'Conheça a oficina, os critérios e a ambição por trás de cada intervenção.',
-    image: carCoverPhotos[3],
+    image: cover.about,
     cta: { label: 'Conhecer', target: 'about' },
   },
   {
@@ -92,7 +93,7 @@ export const pages = [
     eyebrow: '02 · Serviços',
     title: 'Serviços.',
     lede: 'Manutenção, modificações, reprogramações e vendas a consignação para carros que pedem mais.',
-    image: carCoverPhotos[0],
+    image: cover.services,
     cta: { label: 'Ver serviços', target: 'services' },
   },
   {
@@ -117,14 +118,31 @@ export const pages = [
   {
     id: 'reprogramacoes',
     tabId: 'services-cover',
-    kind: 'copy-photos',
+    kind: 'reprog',
     number: '02',
     eyebrow: '02 · Reprogramações',
     title: 'Reprogramações.',
-    lede: 'Afinações eletrónicas e otimizações de ECU para maior performance e eficiência.',
-    body: [
-      { text: 'Trabalhamos com banco de potência próprio e software de última geração para garantir resultados seguros e fiáveis.' },
+    lede: 'Afinações eletrónicas e otimizações de ECU para mais performance — ou mais eficiência —, sempre medidas no nosso banco de potência.',
+    intro: 'Uma reprogramação bem feita não é carregar um mapa genérico. É medir o carro como está, perceber o que o motor e a mecânica permitem com segurança, e só depois afinar. O ficheiro original fica sempre guardado, e é sempre possível voltar atrás.',
+    areasTitle: 'O que fazemos',
+    areas: [
+      { heading: 'Afinação personalizada', text: 'Mapas desenvolvidos para o teu carro e para o combustível que usas (95, 98 ou E85 quando aplicável) — não ficheiros de catálogo. Ganhos reais de potência e binário, sempre dentro de margens de segurança.' },
+      { heading: 'Stage 1 e além', text: 'Da otimização com o carro de série ao acompanhamento de upgrades de admissão, escape, intercooler ou turbo. Sempre que o hardware muda, a calibração é revista.' },
+      { heading: 'Correções e limitadores', text: 'Ajuste de limitadores conforme o uso, resposta do acelerador e da caixa, launch control e afinações de comportamento — quando a ECU ou a TCU o permitem.' },
+      { heading: 'Diagnóstico e dados', text: 'Leitura de todos os módulos, análise de logs e verificação de sensores antes de qualquer afinação. Se houver um problema mecânico, aparece aqui primeiro.' },
+      { heading: 'Mapas de eficiência', text: 'Para quem quer consumo e não potência: calibrações focadas em condução económica, sem comprometer a fiabilidade do motor.' },
     ],
+    stepsTitle: 'Como trabalhamos',
+    steps: [
+      'Leitura e cópia do ficheiro original da ECU — guardada e sempre disponível para reverter.',
+      'Diagnóstico completo e verificação do estado mecânico do motor.',
+      'Mapa base adaptado ao carro, ao combustível e ao tipo de uso.',
+      'Sessões no banco de potência próprio, com medição real de potência e binário antes e depois.',
+      'Validação em estrada e ajustes finais de resposta e condução.',
+      'Entrega com relatório, gráfico do dyno e o ficheiro original disponível.',
+    ],
+    outro: 'Nunca números de catálogo. Nunca um mapa que a mecânica do carro não aguenta.',
+    galleryTitle: 'No banco de potência',
     photos: [
       asset('/reprogramacoes/reprogramacao-1.jpg'),
       asset('/reprogramacoes/reprogramacao-2.jpg'),
@@ -288,7 +306,7 @@ export const pages = [
     eyebrow: '03 · Projetos',
     title: 'Projetos.',
     lede: 'Carros, intervenções e resultados construídos com rigor.',
-    image: carCoverPhotos[2],
+    image: cover.projects,
     cta: { label: 'Ver projetos', target: 'projects' },
   },
   {

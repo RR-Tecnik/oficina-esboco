@@ -260,6 +260,48 @@ function guideVariantHTML(v) {
     </section>`
 }
 
+function renderReprog(page) {
+  const alt = 'Reprogramações RR Technik'
+  return `
+    <div class="service-doc">
+      <header class="service-doc-head">
+        <button class="back-link" type="button" data-go="services">&larr; Voltar aos serviços</button>
+        <p class="eyebrow">${esc(page.eyebrow)}</p>
+        <h1>${titleHTML(page.title)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+        ${page.intro ? `<p>${esc(page.intro)}</p>` : ''}
+      </header>
+
+      <section class="service-block">
+        <h2 class="service-block-title">${esc(page.areasTitle)}</h2>
+        <div class="area-grid">
+          ${page.areas.map((area) => `
+            <article class="area-card">
+              <h3>${esc(area.heading)}</h3>
+              <p>${esc(area.text)}</p>
+            </article>`).join('')}
+        </div>
+      </section>
+
+      <section class="service-block">
+        <h2 class="service-block-title">${esc(page.stepsTitle)}</h2>
+        <ol class="step-list">
+          ${page.steps.map((step, i) => `
+            <li><span class="step-n">${String(i + 1).padStart(2, '0')}</span><p>${esc(step)}</p></li>`).join('')}
+        </ol>
+        ${page.outro ? `<p class="service-outro">${esc(page.outro)}</p>` : ''}
+      </section>
+
+      ${page.photos?.length ? `
+      <section class="service-block">
+        <h2 class="service-block-title">${esc(page.galleryTitle || 'Galeria')}</h2>
+        <div class="reprog-gallery">
+          ${page.photos.map((src, i) => `<button class="photo-tile${i === 0 ? ' is-hero' : ''}" type="button" data-photo-src="${src}" data-photo-alt="${esc(alt)} ${i + 1}" data-photo-index="${i + 1}" data-photo-total="${page.photos.length}"><img src="${src}" alt="${esc(alt)} ${i + 1}" loading="lazy"></button>`).join('')}
+        </div>
+      </section>` : ''}
+    </div>`
+}
+
 function renderAbout(page) {
   return `
     <div class="about-doc">
@@ -318,6 +360,7 @@ const RENDERERS = {
   'car-detail': renderCarDetail,
   'service-doc': renderServiceDoc,
   'service-guide': renderServiceGuide,
+  reprog: renderReprog,
   about: renderAbout,
 }
 
