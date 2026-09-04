@@ -1,6 +1,14 @@
 export function renderShell(brand, nav, pageCount) {
   return `
     <div class="app-shell">
+      <div class="preloader" id="preloader" role="presentation">
+        <div class="preloader-mark">
+          <svg viewBox="0 0 200 90" aria-hidden="true" focusable="false">
+            <text x="100" y="66" text-anchor="middle" class="preloader-rr">${brand.mark}</text>
+          </svg>
+          <span class="preloader-sub">${brand.name}</span>
+        </div>
+      </div>
       <header class="topbar">
         <button class="brand" type="button" data-go="home" aria-label="RR Technik, início">
           <span>${brand.mark}</span>

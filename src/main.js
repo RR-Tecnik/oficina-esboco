@@ -32,29 +32,75 @@ function setActiveChrome(index) {
   pagerCount.textContent = `${page.number} / ${String(sectionCount).padStart(2, '0')}`
 }
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+let navToken = 0
+
 function mountPage(index, { instant = false } = {}) {
   const page = pages[index]
   if (!page) return
+  const previous = current
   current = index
-
-  const swap = () => {
-    stage.innerHTML = renderPage(page)
-    stage.dataset.kind = page.kind
-    stage.firstElementChild.scrollTop = 0
-    stage.querySelector('.page-copy')?.scrollTo(0, 0)
-    requestAnimationFrame(() => stage.classList.add('is-visible'))
-    wirePageContent()
-  }
-
-  if (instant || !stage.firstElementChild) {
-    swap()
-  } else {
-    stage.classList.remove('is-visible')
-    window.setTimeout(swap, 220)
-  }
 
   setActiveChrome(index)
   history.replaceState(null, '', `#${page.id}`)
+
+  // collapse any transition still in flight so we always start from 0 or 1 page
+  while (stage.children.length > 1) stage.firstElementChild.remove()
+  const outgoing = stage.firstElementChild
+  if (outgoing) {
+    outgoing.classList.remove('is-entering', 'is-sliding')
+    outgoing.style.transform = ''
+    outgoing.style.opacity = ''
+  }
+
+  const holder = document.createElement('div')
+  holder.innerHTML = renderPage(page)
+  const nextEl = holder.firstElementChild
+  stage.dataset.kind = page.kind
+
+  if (instant || !outgoing || prefersReducedMotion.matches) {
+    if (outgoing) outgoing.remove()
+    stage.appendChild(nextEl)
+    nextEl.scrollTop = 0
+    nextEl.querySelector('.page-copy')?.scrollTo(0, 0)
+    wirePageContent(nextEl)
+    return
+  }
+
+  const token = ++navToken
+  const dir = index > previous ? 1 : -1
+
+  nextEl.classList.add('is-entering')
+  nextEl.style.transform = `translateX(${dir * 100}%)`
+  stage.appendChild(nextEl)
+  nextEl.querySelector('.page-copy')?.scrollTo(0, 0)
+  wirePageContent(nextEl)
+
+  void nextEl.offsetWidth // commit the start position before transitioning
+
+  requestAnimationFrame(() => {
+    if (token !== navToken) return
+    nextEl.classList.add('is-sliding')
+    outgoing.classList.add('is-sliding')
+    nextEl.style.transform = 'translateX(0)'
+    outgoing.style.transform = `translateX(${dir * -30}%)`
+    outgoing.style.opacity = '0.35'
+  })
+
+  const onEnd = (event) => {
+    if (event.target !== nextEl || event.propertyName !== 'transform') return
+    nextEl.removeEventListener('transitionend', onEnd)
+    cleanup()
+  }
+  function cleanup() {
+    if (token !== navToken) return
+    nextEl.removeEventListener('transitionend', onEnd)
+    outgoing.remove()
+    nextEl.classList.remove('is-entering', 'is-sliding')
+    nextEl.style.transform = ''
+  }
+  nextEl.addEventListener('transitionend', onEnd)
+  window.setTimeout(cleanup, 760)
 }
 
 function goToId(id) {
@@ -74,8 +120,8 @@ function goToCarouselIndex(index) {
   if (next >= 0 && next !== current) mountPage(next)
 }
 
-function wirePageContent() {
-  const form = stage.querySelector('#contact-form')
+function wirePageContent(root) {
+  const form = root.querySelector('#contact-form')
   if (form) {
     const hint = form.querySelector('.form-hint')
     const submitButton = form.querySelector('button[type="submit"]')
@@ -157,7 +203,7 @@ function wirePageContent() {
     })
   }
 
-  stage.querySelectorAll('.photo-tile').forEach((tile) => {
+  root.querySelectorAll('.photo-tile').forEach((tile) => {
     tile.addEventListener('click', () => {
       lightboxImg.src = tile.dataset.photoSrc
       lightboxImg.alt = tile.dataset.photoAlt
@@ -167,14 +213,14 @@ function wirePageContent() {
     })
   })
 
-  stage.querySelectorAll('[data-go]').forEach((el) => {
+  root.querySelectorAll('[data-go]').forEach((el) => {
     el.addEventListener('click', () => goToId(el.dataset.go))
   })
 
-  const guideToggle = stage.querySelector('.guide-toggle')
+  const guideToggle = root.querySelector('.guide-toggle')
   if (guideToggle) {
     const buttons = [...guideToggle.querySelectorAll('.guide-toggle-btn')]
-    const panels = [...stage.querySelectorAll('.guide-panel')]
+    const panels = [...root.querySelectorAll('.guide-panel')]
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
         const target = button.dataset.guideTarget
@@ -184,7 +230,7 @@ function wirePageContent() {
           b.setAttribute('aria-selected', String(on))
         })
         panels.forEach((panel) => { panel.hidden = panel.dataset.guidePanel !== target })
-        stage.firstElementChild?.scrollTo({ top: 0 })
+        root.scrollTo({ top: 0 })
       })
     })
   }
@@ -225,6 +271,29 @@ document.querySelector('.stage').addEventListener('touchend', (e) => {
   if (Math.abs(distance) > 50) goToIndex(distance < 0 ? 1 : -1)
 }, { passive: true })
 window.addEventListener('hashchange', () => goToId(window.location.hash.slice(1)))
+
+// -- preloader (RR mark draws in, then the curtain lifts) — once per session --
+const preloader = document.getElementById('preloader')
+if (preloader) {
+  let seen = null
+  try { seen = sessionStorage.getItem('rr-intro') } catch { /* private mode */ }
+  if (seen) {
+    preloader.remove()
+  } else {
+    try { sessionStorage.setItem('rr-intro', '1') } catch { /* ignore */ }
+    let dismissed = false
+    const dismiss = () => {
+      if (dismissed) return
+      dismissed = true
+      preloader.classList.add('is-done')
+      preloader.addEventListener('transitionend', () => preloader.remove(), { once: true })
+      window.setTimeout(() => preloader.remove(), 1000)
+    }
+    window.setTimeout(dismiss, prefersReducedMotion.matches ? 480 : 2050)
+    preloader.addEventListener('click', dismiss)
+    window.addEventListener('keydown', dismiss, { once: true })
+  }
+}
 
 // -- initial mount --
 const initialId = window.location.hash.slice(1)

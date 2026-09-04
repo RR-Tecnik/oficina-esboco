@@ -84,10 +84,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; over
   flex: 1 1 auto;
   min-height: 0;
   position: relative;
-  opacity: 0;
-  transition: opacity .22s ease;
+  overflow: hidden;
 }
-.stage.is-visible { opacity: 1; }
 
 /* ---------- pager (arrows + progress) ---------- */
 .pager {
@@ -1012,4 +1010,73 @@ body { overflow-x: hidden; overflow-y: auto; }
 
 @media (max-width: 700px) {
   .page-cover::before { display: none; }
+}
+
+/* ============================================================
+   PRELOADER — the RR mark draws itself, then the curtain lifts
+   ============================================================ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  transition: transform .62s cubic-bezier(.72, 0, .18, 1);
+}
+.preloader.is-done { transform: translateY(-100%); }
+
+.preloader-mark { display: grid; justify-items: center; gap: 16px; }
+.preloader svg { width: min(52vw, 280px); height: auto; overflow: visible; display: block; }
+.preloader-rr {
+  font-family: var(--font-wordmark);
+  font-weight: 800;
+  font-size: 72px;
+  letter-spacing: .04em;
+  fill: transparent;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: rr-draw 1.05s cubic-bezier(.55, 0, .3, 1) forwards,
+             rr-fill .55s ease .95s forwards;
+}
+@keyframes rr-draw { to { stroke-dashoffset: 0; } }
+@keyframes rr-fill { to { fill: var(--accent); stroke-width: 0; } }
+
+.preloader-sub {
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  opacity: 0;
+  transform: translateY(6px);
+  animation: rr-sub .5s ease 1.15s forwards;
+}
+@keyframes rr-sub { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader-rr { animation: none; fill: var(--accent); stroke-width: 0; stroke-dashoffset: 0; }
+  .preloader-sub { animation: none; opacity: 1; transform: none; }
+  .preloader { transition: opacity .3s ease; }
+  .preloader.is-done { transform: none; opacity: 0; }
+}
+
+/* ============================================================
+   SECTION TRANSITIONS — directional slide with a parallax push
+   ============================================================ */
+.stage > .page.is-entering { z-index: 3; }
+/* opaque only while moving, so content pages don't ghost through each other */
+.stage > .page.is-entering,
+.stage > .page.is-sliding { background: var(--bg); }
+.stage > .page.is-sliding {
+  transition: transform .58s cubic-bezier(.4, 0, .12, 1), opacity .58s ease;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage > .page.is-sliding { transition: opacity .2s ease; }
 }
