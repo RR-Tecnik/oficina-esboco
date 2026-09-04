@@ -110,18 +110,35 @@ function renderCopyLogos(page) {
 }
 
 function renderCopyMap(page) {
+  const alt = page.title.replace('\n', ' ')
+  const rows = [
+    { label: 'Morada', value: page.address.map((line) => esc(line)).join('<br>') },
+    page.access ? { label: 'Acessos', value: esc(page.access) } : null,
+    page.hours ? { label: 'Horário', value: esc(page.hours) } : null,
+  ].filter(Boolean)
   return `
     <div class="page-copy">
       <p class="eyebrow">${esc(page.eyebrow)}</p>
       <h1>${titleHTML(page.title)}</h1>
       <p class="lede">${esc(page.lede)}</p>
       ${bodyHTML(page.body)}
-      <div class="info-card">
-        ${page.address.map((line) => `<p>${esc(line)}</p>`).join('')}
-        <a href="${page.mapUrl}" target="_blank" rel="noreferrer">Abrir no mapa</a>
+      <div class="location-info">
+        ${rows.map((row) => `
+          <div class="location-row">
+            <span class="location-row-label">${row.label}</span>
+            <span class="location-row-value">${row.value}</span>
+          </div>`).join('')}
+        <a class="cta location-cta" href="${page.mapUrl}" target="_blank" rel="noreferrer">Abrir no Google Maps →</a>
       </div>
     </div>
-    <div class="page-visual">${photoGrid(page.photos, page.title.replace('\n', ' '))}</div>`
+    <div class="page-visual">
+      <div class="location-visual">
+        ${page.mapEmbed ? `<div class="location-map"><iframe src="${page.mapEmbed}" title="Mapa — ${esc(alt)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>` : ''}
+        <div class="location-gallery">
+          ${page.photos.map((src, i) => `<button class="photo-tile${i === 0 ? ' is-hero' : ''}" type="button" data-photo-src="${src}" data-photo-alt="${esc(alt)} ${i + 1}" data-photo-index="${i + 1}" data-photo-total="${page.photos.length}"><img src="${src}" alt="${esc(alt)} ${i + 1}" loading="lazy"></button>`).join('')}
+        </div>
+      </div>
+    </div>`
 }
 
 function renderCopyForm(page) {
@@ -243,6 +260,38 @@ function guideVariantHTML(v) {
     </section>`
 }
 
+function renderAbout(page) {
+  return `
+    <div class="about-doc">
+      <header class="about-masthead">
+        <p class="eyebrow">${esc(page.eyebrow)}</p>
+        <h1>${titleHTML(page.title)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+      </header>
+
+      <div class="about-pillars">
+        ${page.body.map((block) => `
+          <article class="about-pillar">
+            <h2>${esc(block.heading)}</h2>
+            <p>${esc(block.text)}</p>
+          </article>`).join('')}
+      </div>
+
+      <section class="about-base">
+        <dl class="about-facts">
+          ${page.facts.map((fact) => `
+            <div class="about-fact">
+              <dt>${esc(fact.label)}</dt>
+              <dd>${esc(fact.value)}</dd>
+            </div>`).join('')}
+        </dl>
+        ${page.partners?.length ? `<div class="partner-grid about-partner-grid">${page.partners.map((p) => `<span>${esc(p)}</span>`).join('')}</div>` : ''}
+      </section>
+
+      ${page.signature ? `<p class="about-signature">${esc(page.signature)}</p>` : ''}
+    </div>`
+}
+
 function renderServiceGuide(page) {
   return `
     <div class="service-doc">
@@ -269,11 +318,12 @@ const RENDERERS = {
   'car-detail': renderCarDetail,
   'service-doc': renderServiceDoc,
   'service-guide': renderServiceGuide,
+  about: renderAbout,
 }
 
 export function renderPage(page) {
   const renderer = RENDERERS[page.kind]
   if (!renderer) throw new Error(`Unknown page kind: ${page.kind}`)
-  const noVisualClass = page.id === 'about' ? ' page-no-visual' : ''
-  return `<article class="page page-${page.kind}${noVisualClass}" data-page-id="${page.id}">${renderer(page)}</article>`
+  const number = page.number ? ` data-number="${esc(page.number)}"` : ''
+  return `<article class="page page-${page.kind}" data-page-id="${page.id}"${number}>${renderer(page)}</article>`
 }

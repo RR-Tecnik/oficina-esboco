@@ -23,16 +23,13 @@ export const nav = [
   { id: 'contact-cover', label: 'Contactos e marcações' },
 ]
 
+// Só imagens do edifício / instalações (sem carros).
 const workshopPhotos = [
-  asset('/workshop/workshop-1.jpg'),
   asset('/workshop/workshop-2.jpg'),
+  asset('/workshop/workshop-1.jpg'),
   asset('/workshop/workshop-3.jpg'),
-  asset('/workshop/workshop-4.jpg'),
   asset('/workshop/workshop-5.jpg'),
-  'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=2400&q=90',
-  'https://i.imgur.com/8KjB9QY.jpeg',
-  'https://i.imgur.com/3R2kF4L.jpeg',
-  'https://i.imgur.com/9P5vH8N.jpeg',
+  asset('/workshop/workshop-4.jpg'),
 ]
 
 const carCoverPhotos = [
@@ -70,16 +67,22 @@ export const pages = [
   {
     id: 'about',
     tabId: 'about-cover',
-    kind: 'copy-photos',
+    kind: 'about',
     number: '01',
     eyebrow: '01 · Sobre nós',
     title: 'Mais do que\numa oficina.',
     lede: 'A RR Technik é uma oficina especializada em carros desportivos e de marcas premium, fundada por dois sócios com o mesmo critério: se vai ser feito, é para ser feito com excelência.',
     body: [
       { heading: 'No que acreditamos', text: 'Excelência em cada intervenção, com procedimentos certificados, parâmetros específicos e grelhas de avaliação rigorosas aplicadas a cada trabalho. Honestidade total com o cliente: o orçamento vem antes do trabalho, sem surpresas na fatura. E dedicação constante à aprendizagem, porque cada geração de carros traz sistemas novos, e queremos estar sempre na vanguarda da técnica e do conhecimento que colocamos ao serviço de cada carro.' },
-      { heading: 'Para onde vamos', text: 'A ambição é clara: ser a referência em Portugal para preparação e afinação de automóveis de performance, e o parceiro de confiança de equipas amadoras e profissionais por todo o país. A base já está montada, com banco de potência próprio, alinhamento de geometria 3D, quatro postos de elevação e parcerias com marcas como KW, Brembo, Motul e Michelin. O resto constrói-se cliente a cliente, carro a carro.' },
+      { heading: 'Para onde vamos', text: 'A ambição é clara: ser a referência em Portugal para preparação e afinação de automóveis de performance, e o parceiro de confiança de equipas amadoras e profissionais por todo o país. A base já está montada. O resto constrói-se cliente a cliente, carro a carro.' },
     ],
-    signature: 'Rodrigo e Rafael, RR Technik',
+    facts: [
+      { label: 'Instalações', value: 'Quatro postos de elevação · banco de potência próprio · alinhamento de geometria 3D' },
+      { label: 'Fundadores', value: 'Rodrigo e Rafael, dois sócios com o mesmo critério' },
+      { label: 'Base', value: 'Valongo · Portugal' },
+    ],
+    partners: ['KW', 'Brembo', 'Motul', 'Michelin'],
+    signature: 'Rodrigo e Rafael · RR Technik',
   },
   {
     id: 'services-cover',
@@ -317,7 +320,7 @@ export const pages = [
     eyebrow: '04 · Localização',
     title: 'Localização.',
     lede: 'Encontre a RR Technik em Valongo, com acesso fácil pela A4 e A41.',
-    image: workshopPhotos[1],
+    image: workshopPhotos[0],
     cta: { label: 'Ver localização', target: 'location' },
   },
   {
@@ -327,12 +330,15 @@ export const pages = [
     number: '04',
     eyebrow: '04 · Onde estamos',
     title: 'Chegue ao\nponto certo.',
-    lede: 'Estamos em Valongo, a poucos minutos do nó da A4/A41. É um acesso pensado para quem vem de reboque, de trailer ou simplesmente a conduzir.',
+    lede: 'Estamos em Valongo, a poucos minutos do nó da A4/A41. Um acesso pensado para quem vem de reboque, de trailer ou simplesmente a conduzir.',
     body: [
       { text: 'A oficina foi construída de raiz para este propósito: uma nave equipada com quatro postos de elevação, banco de potência próprio, alinhamento de geometria 3D e ventilação forçada em toda a área de trabalho. Um espaço à medida dos carros que recebe.' },
     ],
-    address: ['Rua do Negral 1007', 'Valongo, Portugal'],
+    address: ['Rua do Negral 1007', 'Valongo · Portugal'],
+    access: 'Nó A4 / A41 a poucos minutos. Estacionamento próprio à porta, com espaço para reboque e trailer.',
+    hours: 'Seg – Sex · 08:30 – 18:00',
     mapUrl: 'https://maps.google.com/?q=Rua+do+Negral+1007+Valongo+Portugal',
+    mapEmbed: 'https://www.google.com/maps?q=Rua%20do%20Negral%201007%2C%20Valongo%2C%20Portugal&z=15&output=embed',
     photos: workshopPhotos,
   },
   {

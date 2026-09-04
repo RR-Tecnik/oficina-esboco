@@ -1,14 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Exo+2:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Mono:wght@400;500&family=Exo+2:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
+/* ============================================================
+   THEME — single source of truth (dark performance + RR blue)
+   ============================================================ */
 :root {
-  --bg: #f5f6f3;
-  --panel: #ffffff;
-  --panel-line: rgba(25, 32, 27, .14);
-  --ink: #17201b;
-  --ink-dim: #66716a;
-  --accent: #b94b36;
-  --accent-ink: #fffaf7;
-  --font-display: 'Orbitron', 'Arial Narrow', sans-serif;
+  --bg: #111416;
+  --panel: #202427;
+  --panel-line: rgba(255, 255, 255, .16);
+  --ink: #f4f2ed;
+  --ink-dim: #c4c7c1;
+  --ink-mute: #9aa09b;
+  --accent: #0f7ec0;
+  --accent-ink: #f2fbff;
+  --font-display: 'Anton', 'Arial Narrow', 'Impact', sans-serif;
+  --font-wordmark: 'Orbitron', 'Anton', sans-serif;
   --font-body: 'Exo 2', sans-serif;
   --font-mono: 'DM Mono', monospace;
   --page-pad: 22px;
@@ -128,7 +133,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; over
 .photo-tile:hover img { transform: scale(1.06); }
 
 /* highlight list (services) */
-.highlight-list { list-style: none; margin: 0 0 0 16px; padding: 0; display: grid; gap: 10px; }
+.highlight-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .highlight-list li { padding: 14px 16px; background: var(--panel); border: 1px solid var(--panel-line); box-shadow: 0 8px 24px rgba(23, 32, 27, .05); }
 .highlight-list li[data-go] { cursor: pointer; transition: background .2s, border-color .2s; }
 .highlight-list li[data-go]:hover { background: rgba(255,255,255,.04); border-color: var(--accent); }
@@ -299,17 +304,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; over
   .dot.is-active { background: var(--accent); transform: scale(1.4); }
 }
 
-/* Dark performance direction, keeping the current page structure. */
-:root {
-  --bg: #111416;
-  --panel: #1b1e1f;
-  --panel-line: rgba(255, 255, 255, .16);
-  --ink: #f4f2ed;
-  --ink-dim: #adb0aa;
-  --accent: #ef3e28;
-  --accent-ink: #fff8f5;
-}
-
+/* Dark performance direction — component overrides (theme tokens live in :root at top). */
 body { background: var(--bg); }
 .app-shell { background: var(--bg); }
 .topbar { background: rgba(17, 20, 22, .94); border-bottom-color: rgba(255,255,255,.12); }
@@ -381,19 +376,7 @@ body { background: var(--bg); }
   .page-cover .cover-copy h1 { font-size: clamp(22px, 3.5vw, 36px); }
 }
 
-:root {
-  --bg: #eceeea;
-  --panel: #ffffff;
-  --panel-line: rgba(23, 32, 27, .18);
-  --ink: #17201b;
-  --ink-dim: #66716a;
-  --accent: #c54a32;
-  --accent-ink: #fffaf7;
-}
-
-body { background: var(--bg); }
-.app-shell { background: linear-gradient(135deg, rgba(255,255,255,.42), transparent 42%); }
-.topbar { background: rgba(255,255,255,.94); border-bottom-color: var(--ink); }
+/* chrome tuning (cascade-critical: nav centering, tab underline, spacing) */
 .brand { gap: 10px; }
 .brand span { font-size: 22px; line-height: 1; }
   @media (max-width: 700px) {
@@ -448,16 +431,7 @@ body { background: var(--bg); }
   .page-visual > * { box-shadow: 10px 10px 0 rgba(23,32,27,.06); }
 }
 
-/* Final visual direction: dark performance look, same current structure. */
-:root {
-  --bg: #111416;
-  --panel: #1b1e1f;
-  --panel-line: rgba(255, 255, 255, .16);
-  --ink: #f4f2ed;
-  --ink-dim: #adb0aa;
-  --accent: #ef3e28;
-  --accent-ink: #fff8f5;
-}
+/* dark look — final chrome/colour overrides */
 body { background: var(--bg); }
 .app-shell, .stage { background: var(--bg); }
 .topbar { background: rgba(17,20,22,.35); border-bottom-color: rgba(255,255,255,.12); }
@@ -565,11 +539,7 @@ html::-webkit-scrollbar-thumb:hover { display: none; }
   .footer-contact { grid-column: 1 / -1; }
 }
 
-/* RR blue identity. */
-:root {
-  --accent: #168bd2;
-  --accent-ink: #f2fbff;
-}
+/* RR blue identity — accent applied across the chrome */
 .brand span, .footer-brand strong { color: var(--accent); }
 .tab::after { background: var(--accent); }
 .page-copy .eyebrow, .page-copy .signature,
@@ -745,4 +715,266 @@ body { overflow-x: hidden; overflow-y: auto; }
 
 @media (max-width: 900px) {
   .plan-grid, .interval-grid, .service-block-split, .area-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   VISUAL REFINEMENTS (layered last so they win on source order)
+   ============================================================ */
+
+/* -- wordmark keeps Orbitron; titles are Anton (condensed poster grotesque) -- */
+.brand span { font-family: var(--font-wordmark); letter-spacing: .02em; }
+.footer-brand strong { font-family: var(--font-wordmark); }
+
+/* -- headings: Anton — uppercase, tight leading, never break mid-word -- */
+.page-copy h1,
+.page-copy h2,
+.service-doc h1,
+.page-cover .cover-copy h1,
+.about-doc h1,
+.about-pillar h2,
+.project-tile-name,
+.highlight-list h3,
+.plan-card h3,
+.area-card h3 {
+  text-transform: uppercase;
+  font-weight: 400;              /* Anton ships one weight — never faux-bold it */
+  letter-spacing: .01em;
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
+}
+/* small card labels: Anton reads better tracked out a touch at these sizes */
+.highlight-list h3,
+.plan-card h3,
+.area-card h3,
+.interval-label { letter-spacing: .045em; }
+.highlight-list h3 { font-size: 15px; }
+
+/* services: top-align the cards with the copy instead of floating them centred */
+@media (min-width: 701px) {
+  .page-copy-list .page-visual {
+    align-items: flex-start;
+    padding-top: clamp(22px, 5vh, 48px);
+  }
+}
+.page-copy h1,
+.service-doc h1,
+.page-cover .cover-copy h1 { line-height: .98; }
+
+/* a touch larger than the old Oswald sizes — not huge */
+.page-cover .cover-copy h1 { font-size: clamp(1.8rem, 3.8vw, 2.9rem); }
+.page-copy h1 { font-size: clamp(1.55rem, 3.2vw, 2.3rem); }
+.service-doc h1 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+.page-copy h2 { font-size: clamp(1.05rem, 1.6vw, 1.25rem); letter-spacing: .02em; }
+.service-block-title { font-size: clamp(1rem, 1.5vw, 1.2rem); letter-spacing: .04em; }
+
+/* -- accent carries more weight across the chrome -- */
+.tab::after { height: 3px; }
+.pager-count { font-family: var(--font-mono); color: var(--accent); font-weight: 500; letter-spacing: .04em; }
+
+/* section number as a hollow watermark on cover pages */
+.page-cover::before {
+  content: attr(data-number);
+  position: absolute;
+  top: calc(var(--topbar-h) + 3vh);
+  right: 5vw;
+  z-index: 2;
+  font-family: var(--font-wordmark);
+  font-weight: 800;
+  font-size: clamp(88px, 15vw, 210px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, .12);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* accent tick before every section title in the service docs */
+.service-block-title { position: relative; padding-left: 16px; }
+.service-block-title::before {
+  content: '';
+  position: absolute; left: 0; top: 2px;
+  width: 4px; height: 1em;
+  background: var(--accent);
+}
+.service-block-split .service-block-title { padding-left: 16px; }
+
+/* -- type scale: a touch more air, better body contrast -- */
+.page-copy .lede { font-size: 16px; }
+.page-copy p { font-size: 14px; }
+.spec-list li { font-size: 13.5px; }
+.service-doc p { font-size: 14px; line-height: 1.75; }
+.service-doc .lede,
+.guide-panel .lede { font-size: clamp(15.5px, 1.35vw, 17.5px); }
+.plan-desc,
+.plan-list li,
+.area-card p,
+.interval-item p + p { font-size: 13px; }
+.contact-form label,
+.form-hint,
+.info-card .info-label,
+.contact-form .info-label { font-size: 12px; }
+
+/* -- cards: raised panel (token) + consistent lift on the clickable ones -- */
+.highlight-list li[data-go] { transition: background .2s, border-color .2s, transform .2s; }
+.highlight-list li[data-go]:hover { transform: translateY(-3px); }
+.plan-card,
+.highlight-list li,
+.interval-item,
+.area-card { box-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset; }
+
+/* -- photos: drop the grey wash, lift slightly on hover -- */
+.project-tile img { filter: contrast(1.04); }
+.project-tile:hover img { filter: contrast(1.04) brightness(1.06); }
+.photo-tile img { filter: saturate(.96) contrast(1.03); }
+.photo-tile:hover img { filter: saturate(1) contrast(1.03) brightness(1.05); }
+
+/* ---------- location page ---------- */
+.location-info { margin-top: 22px; border-top: 1px solid var(--panel-line); }
+.location-row {
+  display: grid; grid-template-columns: 84px 1fr; gap: 14px;
+  padding: 13px 2px; border-bottom: 1px solid var(--panel-line);
+}
+.location-row-label {
+  font-family: var(--font-display);
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); padding-top: 3px;
+}
+.location-row-value { font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+.location-cta { margin-top: 20px; align-self: start; }
+
+.location-visual { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.location-map {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--panel-line);
+  aspect-ratio: 16 / 10; background: var(--panel);
+}
+.location-map iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+  /* keep the embed legible but a touch muted; for a full dark map swap for:
+     filter: invert(.9) hue-rotate(180deg) brightness(.95) contrast(.9); */
+  filter: grayscale(.35) contrast(.95);
+}
+.location-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.location-gallery .photo-tile { aspect-ratio: 4 / 3; }
+.location-gallery .photo-tile.is-hero { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+
+@media (min-width: 701px) {
+  .location-visual { height: 100%; display: grid; grid-template-rows: 1fr 1fr; gap: 10px; }
+  .location-map { aspect-ratio: auto; height: 100%; }
+  .location-gallery { height: 100%; grid-auto-rows: 1fr; overflow: hidden; }
+  .location-gallery .photo-tile,
+  .location-gallery .photo-tile.is-hero { aspect-ratio: auto; height: 100%; grid-column: auto; }
+  .location-gallery .photo-tile:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+/* ---------- about page ---------- */
+.page.page-about {
+  flex-direction: column;
+  align-items: stretch;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.about-doc {
+  align-self: center;
+  width: min(1120px, 100%);
+  padding: clamp(24px, 5vh, 56px) var(--page-pad) clamp(56px, 10vh, 96px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(34px, 6vh, 64px);
+}
+
+.about-masthead { display: grid; gap: 14px; }
+.about-doc .eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+}
+.about-doc h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5.2vw, 3.6rem);
+  line-height: .98;
+  color: var(--ink);
+}
+.about-doc .lede {
+  margin: 4px 0 0;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 52ch;
+}
+
+.about-pillars {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  padding-top: clamp(22px, 4vh, 40px);
+  border-top: 1px solid var(--panel-line);
+}
+.about-pillar h2 {
+  margin: 0 0 14px;
+  padding-top: 12px;
+  border-top: 2px solid var(--accent);
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  color: var(--ink);
+}
+.about-pillar p {
+  margin: 0;
+  font-size: 14px; line-height: 1.75;
+  color: var(--ink-dim);
+  max-width: 58ch;
+}
+
+.about-base {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(24px, 4vw, 52px);
+  align-items: start;
+}
+.about-facts { margin: 0; border-top: 1px solid var(--panel-line); }
+.about-fact {
+  display: grid;
+  grid-template-columns: 116px 1fr;
+  gap: 16px;
+  padding: 14px 2px;
+  border-bottom: 1px solid var(--panel-line);
+}
+.about-fact dt {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 3px;
+}
+.about-fact dd { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink); }
+
+.about-partner-grid { align-self: start; }
+.about-partner-grid span {
+  height: 74px;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--ink-dim);
+}
+
+.about-signature {
+  margin: 0;
+  align-self: flex-end;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .about-pillars,
+  .about-base { grid-template-columns: 1fr; }
+  .about-fact { grid-template-columns: 100px 1fr; }
+  .about-signature { align-self: flex-start; }
+}
+
+@media (max-width: 700px) {
+  .page-cover::before { display: none; }
 }
