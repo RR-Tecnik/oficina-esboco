@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Mono:wght@400;500&family=Exo+2:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
 /* ============================================================
-   THEME — single source of truth (dark performance + RR blue)
+   THEME - single source of truth (dark performance + RR blue)
    ============================================================ */
 :root {
   --bg: #111416;
@@ -305,7 +305,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; over
   .dot.is-active { background: var(--accent); transform: scale(1.4); }
 }
 
-/* Dark performance direction — component overrides (theme tokens live in :root at top). */
+/* Dark performance direction - component overrides (theme tokens live in :root at top). */
 body { background: var(--bg); }
 .app-shell { background: var(--bg); }
 .topbar { background: rgba(17, 20, 22, .94); border-bottom-color: rgba(255,255,255,.12); }
@@ -432,7 +432,7 @@ body { background: var(--bg); }
   .page-visual > * { box-shadow: 10px 10px 0 rgba(23,32,27,.06); }
 }
 
-/* dark look — final chrome/colour overrides */
+/* dark look - final chrome/colour overrides */
 body { background: var(--bg); }
 .app-shell, .stage { background: var(--bg); }
 .topbar { background: rgba(17,20,22,.35); border-bottom-color: rgba(255,255,255,.12); }
@@ -540,7 +540,7 @@ html::-webkit-scrollbar-thumb:hover { display: none; }
   .footer-contact { grid-column: 1 / -1; }
 }
 
-/* RR blue identity — accent applied across the chrome */
+/* RR blue identity - accent applied across the chrome */
 .brand span, .footer-brand strong { color: var(--accent); }
 .tab::after { background: var(--accent); }
 .page-copy .eyebrow, .page-copy .signature,
@@ -736,7 +736,7 @@ body { overflow-x: hidden; overflow-y: auto; }
 .brand span { font-family: var(--font-wordmark); letter-spacing: .02em; }
 .footer-brand strong { font-family: var(--font-wordmark); }
 
-/* -- headings: Anton — uppercase, tight leading, never break mid-word -- */
+/* -- headings: Anton - uppercase, tight leading, never break mid-word -- */
 .page-copy h1,
 .page-copy h2,
 .service-doc h1,
@@ -748,14 +748,14 @@ body { overflow-x: hidden; overflow-y: auto; }
 .plan-card h3,
 .area-card h3 {
   text-transform: uppercase;
-  font-weight: 400;              /* Anton ships one weight — never faux-bold it */
+  font-weight: 400;              /* Anton ships one weight - never faux-bold it */
   letter-spacing: .01em;
   overflow-wrap: normal;
   word-wrap: normal;
   word-break: keep-all;
   hyphens: none;
 }
-/* Anton is too dense at small sizes — mini-titles & labels use Exo 2 instead.
+/* Anton is too dense at small sizes - mini-titles & labels use Exo 2 instead.
    Anton stays only on the big titles (h1 / hero / page headers). */
 .service-block-title,
 .guide-toggle-btn,
@@ -795,7 +795,7 @@ body { overflow-x: hidden; overflow-y: auto; }
 .service-doc h1,
 .page-cover .cover-copy h1 { line-height: .98; }
 
-/* a touch larger than the old Oswald sizes — not huge */
+/* a touch larger than the old Oswald sizes - not huge */
 .page-cover .cover-copy h1 { font-size: clamp(1.8rem, 3.8vw, 2.9rem); }
 .page-copy h1 { font-size: clamp(1.55rem, 3.2vw, 2.3rem); }
 .service-doc h1 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
@@ -1013,7 +1013,7 @@ body { overflow-x: hidden; overflow-y: auto; }
 }
 
 /* ============================================================
-   PRELOADER — the RR mark draws itself, then the curtain lifts
+   PRELOADER - the RR mark draws itself, then the curtain lifts
    ============================================================ */
 .preloader {
   position: fixed;
@@ -1066,7 +1066,7 @@ body { overflow-x: hidden; overflow-y: auto; }
 }
 
 /* ============================================================
-   SECTION TRANSITIONS — directional slide with a parallax push
+   SECTION TRANSITIONS - directional slide with a parallax push
    ============================================================ */
 .stage > .page.is-entering { z-index: 3; }
 /* opaque only while moving, so content pages don't ghost through each other */
@@ -1079,4 +1079,91 @@ body { overflow-x: hidden; overflow-y: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   .stage > .page.is-sliding { transition: opacity .2s ease; }
+}
+
+/* ============================================================
+   VISUAL POLISH - grain, vignette, photo grade, progress rail
+   ============================================================ */
+
+/* film grain + edge vignette over the scene (not over the chrome) */
+body::before,
+body::after { content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+body::before {
+  opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+body::after {
+  background: radial-gradient(128% 122% at 50% 40%, transparent 48%, rgba(5, 6, 7, .46) 100%);
+}
+
+/* left-edge section progress rail */
+.rail {
+  position: fixed; left: 0; top: var(--topbar-h); bottom: 0;
+  width: 2px; z-index: 11; pointer-events: none;
+  background: rgba(255, 255, 255, .07);
+}
+.rail-fill {
+  position: absolute; inset: 0 0 auto 0; width: 100%; height: 0;
+  background: var(--accent);
+  transition: height .55s cubic-bezier(.4, 0, .15, 1);
+}
+@media (max-width: 700px) { .rail { display: none; } }
+
+/* covers: deeper vignette so text always reads, + a spec-sheet mark */
+.page-cover .cover-shade {
+  background:
+    radial-gradient(135% 120% at 28% 50%, transparent 38%, rgba(6, 8, 9, .6) 100%),
+    linear-gradient(90deg, rgba(10, 12, 13, .8), rgba(10, 12, 13, .36) 42%, rgba(10, 12, 13, .05));
+}
+.page-cover::after {
+  content: "RRT–" attr(data-number);
+  position: absolute;
+  left: 6vw; bottom: 5vh;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .24em;
+  color: rgba(255, 255, 255, .3);
+  pointer-events: none;
+}
+
+/* unified photo grade */
+.page-cover .cover-visual { filter: saturate(.94) contrast(1.08) brightness(1); }
+.project-tile img,
+.photo-tile img { filter: saturate(.97) contrast(1.06) brightness(1.02); }
+.project-tile:hover img { filter: saturate(1) contrast(1.06) brightness(1.07); }
+.photo-tile:hover img { filter: saturate(1) contrast(1.06) brightness(1.06); }
+
+/* machined edge on panels */
+.plan-card,
+.area-card,
+.interval-item,
+.highlight-list li,
+.contact-form,
+.partner-grid span { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05); }
+
+/* selection + focus */
+::selection { background: var(--accent); color: var(--accent-ink); }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* staggered content entrance on section mount (from a visible resting state) */
+@media (prefers-reduced-motion: no-preference) {
+  .page.is-mounting .page-copy > *,
+  .page.is-mounting .cover-copy > *,
+  .page.is-mounting .service-doc > *,
+  .page.is-mounting .about-doc > * {
+    opacity: 0;
+    animation: rr-rise .42s cubic-bezier(.32, 0, .2, 1) var(--rise-d, 0s) forwards;
+  }
+}
+@keyframes rr-rise {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 700px) {
+  .page-cover::after { left: var(--page-pad); bottom: 84px; }
 }

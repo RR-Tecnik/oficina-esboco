@@ -108,7 +108,7 @@ export const pages = [
     title: 'Afinamos\no extraordinário.',
     lede: 'Na RR Technik, cada intervenção é pensada para o carro que temos à nossa frente. Não existe um "tamanho único" quando se fala de performance.',
     body: [
-      { text: 'Manutenção, modificações, reprogramações e vendas a consignação — cada intervenção é pensada para o carro que temos à nossa frente, sem soluções universais.' },
+      { text: 'Manutenção, modificações, reprogramações e vendas a consignação, cada intervenção é pensada para o carro que temos à nossa frente, sem soluções universais.' },
       { text: 'Cada orçamento é apresentado antes do trabalho começar, com tudo explicado, para que a decisão seja sempre sua.' },
     ],
     highlights: [
@@ -125,19 +125,19 @@ export const pages = [
     number: '02',
     eyebrow: '02 · Reprogramações',
     title: 'Reprogramações.',
-    lede: 'Afinações eletrónicas e otimizações de ECU para mais performance — ou mais eficiência —, sempre medidas no nosso banco de potência.',
+    lede: 'Afinações eletrónicas e otimizações de ECU para mais performance, ou mais eficiência, sempre medidas no nosso banco de potência.',
     intro: 'Uma reprogramação bem feita não é carregar um mapa genérico. É medir o carro como está, perceber o que o motor e a mecânica permitem com segurança, e só depois afinar. O ficheiro original fica sempre guardado, e é sempre possível voltar atrás.',
     areasTitle: 'O que fazemos',
     areas: [
-      { heading: 'Afinação personalizada', text: 'Mapas desenvolvidos para o teu carro e para o combustível que usas (95, 98 ou E85 quando aplicável) — não ficheiros de catálogo. Ganhos reais de potência e binário, sempre dentro de margens de segurança.' },
+      { heading: 'Afinação personalizada', text: 'Mapas desenvolvidos para o teu carro e para o combustível que usas (95, 98 ou E85 quando aplicável), não ficheiros de catálogo. Ganhos reais de potência e binário, sempre dentro de margens de segurança.' },
       { heading: 'Stage 1 e além', text: 'Da otimização com o carro de série ao acompanhamento de upgrades de admissão, escape, intercooler ou turbo. Sempre que o hardware muda, a calibração é revista.' },
-      { heading: 'Correções e limitadores', text: 'Ajuste de limitadores conforme o uso, resposta do acelerador e da caixa, launch control e afinações de comportamento — quando a ECU ou a TCU o permitem.' },
+      { heading: 'Correções e limitadores', text: 'Ajuste de limitadores conforme o uso, resposta do acelerador e da caixa, launch control e afinações de comportamento, quando a ECU ou a TCU o permitem.' },
       { heading: 'Diagnóstico e dados', text: 'Leitura de todos os módulos, análise de logs e verificação de sensores antes de qualquer afinação. Se houver um problema mecânico, aparece aqui primeiro.' },
       { heading: 'Mapas de eficiência', text: 'Para quem quer consumo e não potência: calibrações focadas em condução económica, sem comprometer a fiabilidade do motor.' },
     ],
     stepsTitle: 'Como trabalhamos',
     steps: [
-      'Leitura e cópia do ficheiro original da ECU — guardada e sempre disponível para reverter.',
+      'Leitura e cópia do ficheiro original da ECU, guardada e sempre disponível para reverter.',
       'Diagnóstico completo e verificação do estado mecânico do motor.',
       'Mapa base adaptado ao carro, ao combustível e ao tipo de uso.',
       'Sessões no banco de potência próprio, com medição real de potência e binário antes e depois.',
@@ -161,14 +161,14 @@ export const pages = [
     number: '02',
     eyebrow: '02 · Manutenções',
     title: 'Manutenções.',
-    lede: 'Um carro de performance não se revê como um carro normal. Diferentes marcas, diferentes motores, diferentes usos — cada revisão é feita a pensar no carro que temos à nossa frente, não num manual genérico.',
+    lede: 'Um carro de performance não se revê como um carro normal. Diferentes marcas, diferentes motores, diferentes usos, cada revisão é feita a pensar no carro que temos à nossa frente, não num manual genérico.',
     intro: 'Um carro que faz trackdays todos os meses não tem as mesmas necessidades de um que anda maioritariamente na estrada. Um motor atmosférico não pede os mesmos cuidados de um turbo. E um carro que vive em pista desgasta travões, pneus e fluidos a um ritmo que nada tem a ver com o uso diário. É essa diferença que está sempre presente em cada intervenção que fazemos, seja qual for a marca ou o modelo.',
     plansTitle: 'Os nossos planos de manutenção',
     plans: [
       {
         tier: '01',
         name: 'Revisão Standard',
-        desc: 'Pensada para o carro do dia a dia — o que ainda assim merece cuidado a sério.',
+        desc: 'Pensada para o carro do dia a dia, o que ainda assim merece cuidado a sério.',
         items: [
           'Mudança de óleo e filtro com lubrificante de gama alta adequado ao motor',
           'Substituição de filtros de ar, habitáculo e combustível',
@@ -188,7 +188,7 @@ export const pages = [
         items: [
           'Purga do sistema de travões com fluido DOT 4 ou DOT 5.1 racing, conforme o uso',
           'Verificação de suspensão, casquilhos e amortecedores',
-          'Diagnóstico eletrónico completo, com leitura de todos os módulos do carro — não só o motor',
+          'Diagnóstico eletrónico completo, com leitura de todos os módulos do carro, não só o motor',
           'Equilibragem de rodas e verificação de geometria',
           'Limpeza de injetores e verificação do sistema de admissão',
           'Teste de bateria e sistema de carga',
@@ -209,7 +209,7 @@ export const pages = [
       },
     ],
     intervalsTitle: 'Manutenção por intervalos de uso',
-    intervalsIntro: 'Não seguimos só o manual do fabricante — ajustamos os intervalos ao uso real do carro:',
+    intervalsIntro: 'Não seguimos só o manual do fabricante, ajustamos os intervalos ao uso real do carro:',
     intervals: [
       { label: 'Uso diário', text: 'Revisão a cada 10.000–15.000 km ou anualmente.' },
       { label: 'Fim de semana / lazer', text: 'Revisão anual, independentemente da quilometragem.' },
@@ -218,7 +218,7 @@ export const pages = [
     columns: [
       {
         heading: 'Os mais altos padrões',
-        text: 'Cada parafuso é apertado ao binário exato especificado para aquele ponto — nunca ao "sentir", sempre com chave dinamométrica calibrada. Cada intervenção segue procedimentos certificados, documentados, aplicados de forma consistente independentemente da marca ou do modelo que está à nossa frente. É esse rigor, e não o logótipo no capô, que determina como trabalhamos.',
+        text: 'Cada parafuso é apertado ao binário exato especificado para aquele ponto, nunca ao "sentir", sempre com chave dinamométrica calibrada. Cada intervenção segue procedimentos certificados, documentados, aplicados de forma consistente independentemente da marca ou do modelo que está à nossa frente. É esse rigor, e não o logótipo no capô, que determina como trabalhamos.',
       },
       {
         heading: 'Produtos e parceiros',
@@ -247,25 +247,25 @@ export const pages = [
     ],
     variants: {
       estrada: {
-        lede: 'Modificar um carro de performance não é substituir uma peça por outra mais cara. É perceber como cada alteração afeta o resto do carro — a suspensão que se ajusta ao novo peso do escape, a eletrónica que precisa de ser recalibrada depois de um upgrade de admissão, o travão que passa a ter de responder a mais potência. Cada modificação é pensada como parte de um sistema, não como uma peça isolada.',
+        lede: 'Modificar um carro de performance não é substituir uma peça por outra mais cara. É perceber como cada alteração afeta o resto do carro, a suspensão que se ajusta ao novo peso do escape, a eletrónica que precisa de ser recalibrada depois de um upgrade de admissão, o travão que passa a ter de responder a mais potência. Cada modificação é pensada como parte de um sistema, não como uma peça isolada.',
         intro: [
           'Trabalhamos com carros desportivos e de marcas premium, sempre com o mesmo critério: só se instala o que faz sentido para aquele carro e para o uso que o cliente lhe vai dar.',
         ],
         areasTitle: 'As nossas áreas de intervenção',
         areas: [
-          { heading: 'Escapes e admissão', text: 'Substituição de sistemas de escape e admissão por soluções de maior fluxo, com verificação de decibéis e homologação quando aplicável. Reprogramação da eletrónica sempre que a alteração o justifique, para que o motor trabalhe com os mapas corretos — não apenas com mais ruído.' },
-          { heading: 'Suspensão e travões', text: 'Instalação de coilovers e suspensão regulável, com afinação de geometria feita à medida do uso — estrada, misto ou pista. Upgrade de travões, incluindo kits de maior diâmetro e composto de pastilha específico, com purga de fluido de alto ponto de ebulição sempre que o uso o exigir.' },
-          { heading: 'Reprogramação eletrónica', text: 'Otimização dos mapas de motor em banco de potência próprio, com medição real de potência e binário antes e depois de cada afinação — nunca números de catálogo. Cada reprogramação é documentada, com o ficheiro original guardado.' },
+          { heading: 'Escapes e admissão', text: 'Substituição de sistemas de escape e admissão por soluções de maior fluxo, com verificação de decibéis e homologação quando aplicável. Reprogramação da eletrónica sempre que a alteração o justifique, para que o motor trabalhe com os mapas corretos, não apenas com mais ruído.' },
+          { heading: 'Suspensão e travões', text: 'Instalação de coilovers e suspensão regulável, com afinação de geometria feita à medida do uso, estrada, misto ou pista. Upgrade de travões, incluindo kits de maior diâmetro e composto de pastilha específico, com purga de fluido de alto ponto de ebulição sempre que o uso o exigir.' },
+          { heading: 'Reprogramação eletrónica', text: 'Otimização dos mapas de motor em banco de potência próprio, com medição real de potência e binário antes e depois de cada afinação, nunca números de catálogo. Cada reprogramação é documentada, com o ficheiro original guardado.' },
           { heading: 'Radiadores e arrefecimento', text: 'Instalação de radiadores e intercoolers de maior capacidade para carros que vão trabalhar sob carga sustentada, seja em pista ou em uso exigente na estrada.' },
           { heading: 'Rigidez estrutural', text: 'Instalação de rollbar e rollcage para quem compete ou faz uso intensivo em pista, sempre com atenção aos requisitos de segurança e homologação aplicáveis.' },
         ],
         columns: [
-          { heading: 'Os mais altos padrões', text: 'Cada modificação é instalada com o mesmo rigor de uma revisão: binário correto em cada parafuso, verificado com chave dinamométrica calibrada, e testada antes de o carro sair da oficina. Uma alteração mal instalada não é modificação — é um risco. Por isso, cada intervenção é documentada, com relatório fotográfico e explicação clara do que foi feito e porquê.' },
+          { heading: 'Os mais altos padrões', text: 'Cada modificação é instalada com o mesmo rigor de uma revisão: binário correto em cada parafuso, verificado com chave dinamométrica calibrada, e testada antes de o carro sair da oficina. Uma alteração mal instalada não é modificação, é um risco. Por isso, cada intervenção é documentada, com relatório fotográfico e explicação clara do que foi feito e porquê.' },
           { heading: 'Produtos e parceiros', text: 'Só instalamos peças de marcas de referência reconhecidas no mundo da performance, com histórico comprovado em competição e uso intensivo. Nada de peças genéricas nem de compromissos na qualidade.' },
         ],
         stepsTitle: 'Como funciona',
         steps: [
-          'Conversa inicial para perceber o objetivo — mais potência, melhor comportamento em pista, ou ambos.',
+          'Conversa inicial para perceber o objetivo, mais potência, melhor comportamento em pista, ou ambos.',
           'Proposta técnica com as opções mais adequadas ao carro e ao orçamento disponível.',
           'Instalação com relatório fotográfico de cada etapa.',
           'Teste em banco de potência ou em estrada, conforme a modificação.',
@@ -274,16 +274,16 @@ export const pages = [
         outro: 'Sem promessas de números que não se confirmam na prática. Sem instalar o que não vai servir o carro.',
       },
       competicao: {
-        lede: 'Preparar um carro para competir é diferente de o preparar para um trackday. Aqui não há margem para "quase" — há um regulamento técnico a cumprir, uma grelha de partida à espera, e um carro que tem de aguentar o ritmo de uma prova inteira, não apenas umas voltas de lazer. Trabalhamos com essa exigência em mente, do primeiro parafuso ao último detalhe.',
+        lede: 'Preparar um carro para competir é diferente de o preparar para um trackday. Aqui não há margem para "quase", há um regulamento técnico a cumprir, uma grelha de partida à espera, e um carro que tem de aguentar o ritmo de uma prova inteira, não apenas umas voltas de lazer. Trabalhamos com essa exigência em mente, do primeiro parafuso ao último detalhe.',
         intro: [],
         areasTitle: 'As nossas áreas de intervenção',
         areas: [
-          { heading: 'Conformidade técnica e homologação', text: 'Preparação do carro de acordo com o regulamento técnico da modalidade — circuito, ralis ou endurance — com verificação de todos os pontos que costumam travar um carro nas verificações técnicas. Preferimos encontrar o problema na oficina do que no parque fechado.' },
+          { heading: 'Conformidade técnica e homologação', text: 'Preparação do carro de acordo com o regulamento técnico da modalidade, circuito, ralis ou endurance, com verificação de todos os pontos que costumam travar um carro nas verificações técnicas. Preferimos encontrar o problema na oficina do que no parque fechado.' },
           { heading: 'Estruturas de segurança', text: 'Instalação de rollcage certificado, bancos e cintos homologados, corta-correntes e sistema de extinção, sempre de acordo com os requisitos de segurança aplicáveis à prova. Segurança não é opcional nem negociável.' },
-          { heading: 'Otimização de peso', text: 'Aligeiramento do carro dentro dos limites regulamentares — porque em competição, cada quilo a menos é tempo ganho, mas só conta se for feito sem comprometer a estrutura ou a segurança.' },
-          { heading: 'Motor e transmissão', text: 'Preparação de motor para uso em competição, embraiagens reforçadas e diferenciais adequados à modalidade, com afinação em banco de potência para garantir fiabilidade ao longo de toda a prova — não só um número de potência no papel.' },
+          { heading: 'Otimização de peso', text: 'Aligeiramento do carro dentro dos limites regulamentares, porque em competição, cada quilo a menos é tempo ganho, mas só conta se for feito sem comprometer a estrutura ou a segurança.' },
+          { heading: 'Motor e transmissão', text: 'Preparação de motor para uso em competição, embraiagens reforçadas e diferenciais adequados à modalidade, com afinação em banco de potência para garantir fiabilidade ao longo de toda a prova, não só um número de potência no papel.' },
           { heading: 'Telemetria e análise de dados', text: 'Instalação de sistemas de aquisição de dados para analisar o comportamento do carro e do piloto prova após prova. Os dados não mentem, e são a forma mais rápida de encontrar tempo sem arriscar mais em pista.' },
-          { heading: 'Apoio em prova', text: 'Assistência técnica no dia da competição, com equipa e material preparados para intervir entre sessões — porque um carro parado nas boxes não pontua.' },
+          { heading: 'Apoio em prova', text: 'Assistência técnica no dia da competição, com equipa e material preparados para intervir entre sessões, porque um carro parado nas boxes não pontua.' },
         ],
         columns: [
           { heading: 'Os mais altos padrões', text: 'Cada parafuso é apertado ao binário exato especificado para aquele ponto, verificado com chave dinamométrica calibrada, sem exceções mesmo sob pressão de tempo antes de uma prova. Cada intervenção é documentada, para que o histórico do carro esteja sempre disponível para verificação técnica ou análise posterior.' },

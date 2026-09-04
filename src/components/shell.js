@@ -26,6 +26,8 @@ export function renderShell(brand, nav, pageCount) {
         ${nav.map((item) => `<button type="button" class="mobile-tab" data-go="${item.id}">${item.label}</button>`).join('')}
       </div>
 
+      <div class="rail" aria-hidden="true"><span class="rail-fill" id="rail-fill"></span></div>
+
       <section class="stage" id="stage" aria-live="polite"></section>
 
       <nav class="pager" aria-label="Percorrer páginas">

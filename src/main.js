@@ -8,6 +8,7 @@ app.innerHTML = renderShell(brand, nav, pages.length)
 
 const stage = document.querySelector('#stage')
 const pagerFill = document.querySelector('#pager-fill')
+const railFill = document.querySelector('#rail-fill')
 const pagerCount = document.querySelector('#pager-count')
 const dotsHost = document.querySelector('#pager-dots')
 const menuToggle = document.querySelector('.menu-toggle')
@@ -28,12 +29,22 @@ function setActiveChrome(index) {
   const carouselIndex = carouselPages.findIndex((carouselPage) => carouselPage.id === (page.tabId || page.id))
   document.querySelectorAll('.tab, .mobile-tab').forEach((el) => el.classList.toggle('is-active', el.dataset.go === (page.tabId || page.id)))
   dots.forEach((dot, i) => dot.classList.toggle('is-active', i === carouselIndex))
-  pagerFill.style.height = `${(Number(page.number) / sectionCount) * 100}%`
+  const progress = `${(Number(page.number) / sectionCount) * 100}%`
+  pagerFill.style.height = progress
+  if (railFill) railFill.style.height = progress
   pagerCount.textContent = `${page.number} / ${String(sectionCount).padStart(2, '0')}`
 }
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 let navToken = 0
+
+function staggerIn(pageEl) {
+  if (prefersReducedMotion.matches) return
+  const kids = pageEl.querySelectorAll('.page-copy > *, .cover-copy > *, .service-doc > *, .about-doc > *')
+  kids.forEach((el, i) => { if (i < 6) el.style.setProperty('--rise-d', `${110 + i * 45}ms`) })
+  pageEl.classList.add('is-mounting')
+  window.setTimeout(() => pageEl.classList.remove('is-mounting'), 900)
+}
 
 function mountPage(index, { instant = false } = {}) {
   const page = pages[index]
@@ -64,6 +75,7 @@ function mountPage(index, { instant = false } = {}) {
     nextEl.scrollTop = 0
     nextEl.querySelector('.page-copy')?.scrollTo(0, 0)
     wirePageContent(nextEl)
+    staggerIn(nextEl)
     return
   }
 
@@ -75,6 +87,7 @@ function mountPage(index, { instant = false } = {}) {
   stage.appendChild(nextEl)
   nextEl.querySelector('.page-copy')?.scrollTo(0, 0)
   wirePageContent(nextEl)
+  staggerIn(nextEl)
 
   void nextEl.offsetWidth // commit the start position before transitioning
 
@@ -154,7 +167,7 @@ function wirePageContent(root) {
         return
       }
 
-      const subject = 'Pedido de orçamento — RR Technik'
+      const subject = 'Pedido de orçamento · RR Technik'
       const body = [`Nome: ${nome}`, `Email: ${email}`, telefone ? `Telefone: ${telefone}` : '', '', mensagem].filter(Boolean).join('\n')
       const mailto = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
       const key = brand.web3formsKey?.trim()
@@ -178,7 +191,7 @@ function wirePageContent(root) {
             from_name: nome,
             name: nome,
             email,
-            telefone: telefone || '—',
+            telefone: telefone || 'não indicado',
             message: mensagem,
             botcheck: '',
           }),
@@ -191,7 +204,7 @@ function wirePageContent(root) {
           throw new Error(out.message || 'erro')
         }
       } catch (error) {
-        setHint('Não deu para enviar agora — toque para enviar por email.', 'is-error')
+        setHint('Não deu para enviar agora. Toque para enviar por email.', 'is-error')
         if (hint) {
           hint.style.cursor = 'pointer'
           hint.onclick = () => { window.location.href = mailto }
@@ -272,7 +285,7 @@ document.querySelector('.stage').addEventListener('touchend', (e) => {
 }, { passive: true })
 window.addEventListener('hashchange', () => goToId(window.location.hash.slice(1)))
 
-// -- preloader (RR mark draws in, then the curtain lifts) — once per session --
+// -- preloader (RR mark draws in, then the curtain lifts), once per session --
 const preloader = document.getElementById('preloader')
 if (preloader) {
   let seen = null

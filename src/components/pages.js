@@ -133,7 +133,7 @@ function renderCopyMap(page) {
     </div>
     <div class="page-visual">
       <div class="location-visual">
-        ${page.mapEmbed ? `<div class="location-map"><iframe src="${page.mapEmbed}" title="Mapa — ${esc(alt)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>` : ''}
+        ${page.mapEmbed ? `<div class="location-map"><iframe src="${page.mapEmbed}" title="Mapa · ${esc(alt)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>` : ''}
         <div class="location-gallery">
           ${page.photos.map((src, i) => `<button class="photo-tile${i === 0 ? ' is-hero' : ''}" type="button" data-photo-src="${src}" data-photo-alt="${esc(alt)} ${i + 1}" data-photo-index="${i + 1}" data-photo-total="${page.photos.length}"><img src="${src}" alt="${esc(alt)} ${i + 1}" loading="lazy"></button>`).join('')}
         </div>
