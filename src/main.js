@@ -3,6 +3,42 @@ import { brand, nav, pages } from './data/content.js'
 import { renderShell } from './components/shell.js'
 import { renderPage } from './components/pages.js'
 
+// -- Cal.com booking widget (loads only if a link is configured in brand.calLink) --
+if (brand.calLink) {
+  (function loadCal(C, A, L) {
+    const push = (a, ar) => a.q.push(ar)
+    const d = C.document
+    C.Cal = C.Cal || function (...ar) {
+      const cal = C.Cal
+      if (!cal.loaded) {
+        cal.ns = {}
+        cal.q = cal.q || []
+        d.head.appendChild(d.createElement('script')).src = A
+        cal.loaded = true
+      }
+      if (ar[0] === L) {
+        const api = (...apiAr) => push(api, apiAr)
+        const namespace = ar[1]
+        api.q = api.q || []
+        if (typeof namespace === 'string') {
+          cal.ns[namespace] = cal.ns[namespace] || api
+          push(cal.ns[namespace], ar)
+          push(cal, ['initNamespace', namespace])
+        } else push(cal, ar)
+        return
+      }
+      push(cal, ar)
+    }
+  })(window, 'https://app.cal.com/embed/embed.js', 'init')
+
+  window.Cal('init', { origin: 'https://cal.com' })
+  window.Cal('ui', {
+    styles: { branding: { brandColor: '#0f7ec0' } },
+    hideEventTypeDetails: false,
+    layout: 'month_view',
+  })
+}
+
 const app = document.querySelector('#app')
 app.innerHTML = renderShell(brand, nav, pages.length)
 

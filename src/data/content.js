@@ -15,6 +15,11 @@ export const brand = {
   // Envio real do formulário de contacto (sem servidor), via web3forms.com.
   // Chave associada ao email acima; se vazia, o formulário abre o email do cliente.
   web3formsKey: '4fe49f95-bc4b-49f1-ad68-e4909267455f',
+  // Calendário de marcações (sem servidor), via cal.com — grátis, liga ao Google
+  // Calendar para mostrar disponibilidade real. Cria conta em cal.com, faz um
+  // "event type" (ex. "Visita à oficina") e cola aqui "utilizador/evento".
+  // Vazio = o botão de marcação não aparece, só o formulário.
+  calLink: 'rrtecnik/agendamento-revisao2',
 }
 
 // Keep the tab order aligned with the page order below.
@@ -389,5 +394,6 @@ export const pages = [
     email: 'cardosorodrigo1000@gmail.com',
     phone: '+351 960 455 763',
     phoneHref: '+351 960455763',
+    calLink: brand.calLink,
   },
 ]

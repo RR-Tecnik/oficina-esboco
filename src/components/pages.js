@@ -159,16 +159,24 @@ function renderCopyForm(page) {
       </div>
     </div>
     <div class="page-visual">
-      <form class="contact-form" id="contact-form" novalidate data-mailto="${page.email}">
-        <p class="info-label">Pedido de orçamento</p>
-        <label>Nome<input type="text" name="nome" autocomplete="name" required></label>
-        <label>Email<input type="email" name="email" autocomplete="email" required></label>
-        <label>Telefone (opcional)<input type="tel" name="telefone" autocomplete="tel"></label>
-        <label>Mensagem<textarea name="mensagem" rows="4" required placeholder="Conte-nos sobre o seu carro e o que precisa..."></textarea></label>
-        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-        <button type="submit" class="cta cta-block">Enviar pedido</button>
-        <p class="form-hint" data-default-text="Respondemos a todos os pedidos, normalmente em 1–2 dias úteis.">Respondemos a todos os pedidos, normalmente em 1–2 dias úteis.</p>
-      </form>
+      <div class="contact-visual">
+        ${page.calLink ? `
+        <div class="cal-cta">
+          <p class="info-label">Prefere marcar já?</p>
+          <p class="cal-cta-text">Escolha o dia e a hora que lhe dão mais jeito, sem trocas de email.</p>
+          <button type="button" class="cta cta-block" data-cal-link="${esc(page.calLink)}" data-cal-namespace="" data-cal-config='{"layout":"month_view"}'>Marcar visita →</button>
+        </div>` : ''}
+        <form class="contact-form" id="contact-form" novalidate data-mailto="${page.email}">
+          <p class="info-label">Pedido de orçamento</p>
+          <label>Nome<input type="text" name="nome" autocomplete="name" required></label>
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Telefone (opcional)<input type="tel" name="telefone" autocomplete="tel"></label>
+          <label>Mensagem<textarea name="mensagem" rows="4" required placeholder="Conte-nos sobre o seu carro e o que precisa..."></textarea></label>
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+          <button type="submit" class="cta cta-block">Enviar pedido</button>
+          <p class="form-hint" data-default-text="Respondemos a todos os pedidos, normalmente em 1–2 dias úteis.">Respondemos a todos os pedidos, normalmente em 1–2 dias úteis.</p>
+        </form>
+      </div>
     </div>`
 }
 
