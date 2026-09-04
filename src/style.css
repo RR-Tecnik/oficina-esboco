@@ -12,7 +12,8 @@
   --ink-mute: #9aa09b;
   --accent: #0f7ec0;
   --accent-ink: #f2fbff;
-  --font-display: 'Anton', 'Arial Narrow', 'Impact', sans-serif;
+  --font-display: 'Anton', 'Arial Narrow', 'Impact', sans-serif;  /* big titles only */
+  --font-label: 'Exo 2', sans-serif;                              /* small uppercase labels */
   --font-wordmark: 'Orbitron', 'Anton', sans-serif;
   --font-body: 'Exo 2', sans-serif;
   --font-mono: 'DM Mono', monospace;
@@ -744,12 +745,29 @@ body { overflow-x: hidden; overflow-y: auto; }
   word-break: keep-all;
   hyphens: none;
 }
-/* small card labels: Anton reads better tracked out a touch at these sizes */
+/* Anton is too dense at small sizes — mini-titles & labels use Exo 2 instead.
+   Anton stays only on the big titles (h1 / hero / page headers). */
+.service-block-title,
+.guide-toggle-btn,
 .highlight-list h3,
 .plan-card h3,
 .area-card h3,
-.interval-label { letter-spacing: .045em; }
-.highlight-list h3 { font-size: 15px; }
+.interval-label,
+.page-copy h2,
+.about-pillar h2,
+.project-tile-name,
+.partner-grid span {
+  font-family: var(--font-label);
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+.service-block-title { letter-spacing: .09em; font-size: clamp(.9rem, 1.3vw, 1.05rem); }
+.guide-toggle-btn { letter-spacing: .09em; }
+.interval-label { letter-spacing: .07em; }
+.about-pillar h2 { letter-spacing: .05em; font-weight: 700; }
+.page-copy h2 { letter-spacing: .05em; }
+.step-n { font-family: var(--font-mono); font-weight: 500; }
+.highlight-list h3 { font-size: 14.5px; }
 
 /* services: top-align the cards with the copy instead of floating them centred */
 @media (min-width: 701px) {
